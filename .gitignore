@@ -17,12 +17,15 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Django
-*.log
-local_settings.py
-db.sqlite3
-db.sqlite3-journal
-/media
-/staticfiles
+backend/*.log
+backend/local_settings.py
+backend/db.sqlite3-journal
+backend/media
+backend/staticfiles
+backend/.idea
+backend/.env
+backend/db.sqlite3
+backend/
 
 # --- Node / Next.js ---
 node_modules/
