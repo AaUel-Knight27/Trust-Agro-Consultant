@@ -23,7 +23,6 @@ backend/.ai
 backend/.idea
 *initial*.py
 backend/.env
-backend/db.sqlite3
 *init*.py
 
 
