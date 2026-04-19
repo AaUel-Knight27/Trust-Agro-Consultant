@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'django_filters',
     'apps.blog',
     'apps.services',
+    'apps.team',
     'apps.contact',
 ]
 

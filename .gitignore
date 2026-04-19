@@ -19,7 +19,7 @@ pip-delete-this-directory.txt
 # Django
 backend/*.log
 backend/.venv
-backend/venv
+backend/.ai
 backend/.idea
 backend/staticfiles/
 *initial*.py

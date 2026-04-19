@@ -61,7 +61,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      <section className="border-t bg-zinc-50 py-16 px-6">
+      <section className="border-t bg-muted py-16 px-6">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-bold tracking-tight">Ready to get started?</h2>
           <p className="mt-2 text-muted-foreground">

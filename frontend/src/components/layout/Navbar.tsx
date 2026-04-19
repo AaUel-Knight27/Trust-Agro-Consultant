@@ -27,6 +27,7 @@ import {
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { ThemeToggle } from "@/components/layout/ThemeToggle"
 import { useScrolled } from "@/hooks/useScrolled"
 import { cn } from "@/lib/utils"
 
@@ -143,6 +144,7 @@ export function Navbar() {
           </div>
 
           <div className="flex shrink-0 items-center gap-2">
+            <ThemeToggle />
             <Button
               variant="outline"
               size="sm"
@@ -165,96 +167,99 @@ export function Navbar() {
         </div>
 
         {/* Mobile */}
-        <div className="flex w-full items-center justify-between md:hidden">
+        <div className="flex w-full items-center justify-between gap-2 md:hidden">
           <LogoMark />
-          <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-            <SheetTrigger
-              nativeButton={false}
-              render={<Button variant="ghost" size="icon-sm" aria-label="Open menu" />}
-            >
-              <Menu className="size-5" />
-            </SheetTrigger>
-            <SheetContent side="left" className="flex w-full max-w-sm flex-col gap-0 p-0">
-              <div className="flex items-center gap-3 border-b px-4 py-4">
-                <Image
-                  src="/logo.svg"
-                  width={32}
-                  height={32}
-                  alt=""
-                  className="shrink-0"
-                  aria-hidden
-                />
-                <span className="font-semibold">Trust Agro Consult</span>
-              </div>
-              <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
-                <Link
-                  href="/"
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Home
-                </Link>
-
-                <div className="flex items-center gap-1 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Services
-                  <ChevronDown className="size-3" aria-hidden />
+          <div className="flex shrink-0 items-center gap-1">
+            <ThemeToggle />
+            <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
+              <SheetTrigger
+                nativeButton={false}
+                render={<Button variant="ghost" size="icon-sm" aria-label="Open menu" />}
+              >
+                <Menu className="size-5" />
+              </SheetTrigger>
+              <SheetContent side="left" className="flex w-full max-w-sm flex-col gap-0 p-0">
+                <div className="flex items-center gap-3 border-b px-4 py-4">
+                  <Image
+                    src="/logo.svg"
+                    width={32}
+                    height={32}
+                    alt=""
+                    className="shrink-0"
+                    aria-hidden
+                  />
+                  <span className="font-semibold">Trust Agro Consult</span>
                 </div>
-                {services.map(({ href, label, icon: Icon }) => (
+                <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
                   <Link
-                    key={href}
-                    href={href}
-                    className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm hover:bg-muted"
+                    href="/"
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
                     onClick={() => setMobileOpen(false)}
                   >
-                    <Icon className="size-4 shrink-0 text-muted-foreground" />
-                    {label}
+                    Home
                   </Link>
-                ))}
 
-                <Link
-                  href="/blog"
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  News & Blog
-                </Link>
-                <Link
-                  href="/about"
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  About
-                </Link>
-                <Link
-                  href="/contact"
-                  className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Contact
-                </Link>
-              </nav>
+                  <div className="flex items-center gap-1 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    Services
+                    <ChevronDown className="size-3" aria-hidden />
+                  </div>
+                  {services.map(({ href, label, icon: Icon }) => (
+                    <Link
+                      key={href}
+                      href={href}
+                      className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm hover:bg-muted"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <Icon className="size-4 shrink-0 text-muted-foreground" />
+                      {label}
+                    </Link>
+                  ))}
 
-              <div className="mt-auto flex flex-col gap-3 border-t p-4">
-                <a
-                  href="mailto:info@trustagroconsult.com"
-                  className="text-muted-foreground flex items-center text-sm hover:text-foreground"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  <Mail size={14} className="mr-2 text-green-600" />
-                  info@trustagroconsult.com
-                </a>
-                <Button
-                  size="sm"
-                  nativeButton={false}
-                  className="w-full bg-green-700 text-white hover:bg-green-800"
-                  render={<Link href="/contact" onClick={() => setMobileOpen(false)} />}
-                >
-                  <CalendarCheck size={14} className="mr-1" />
-                  Book Consulting
-                </Button>
-              </div>
-            </SheetContent>
-          </Sheet>
+                  <Link
+                    href="/blog"
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    News & Blog
+                  </Link>
+                  <Link
+                    href="/about"
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    About
+                  </Link>
+                  <Link
+                    href="/contact"
+                    className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Contact
+                  </Link>
+                </nav>
+
+                <div className="mt-auto flex flex-col gap-3 border-t p-4">
+                  <a
+                    href="mailto:info@trustagroconsult.com"
+                    className="text-muted-foreground flex items-center text-sm hover:text-foreground"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <Mail size={14} className="mr-2 text-green-600" />
+                    info@trustagroconsult.com
+                  </a>
+                  <Button
+                    size="sm"
+                    nativeButton={false}
+                    className="w-full bg-green-700 text-white hover:bg-green-800"
+                    render={<Link href="/contact" onClick={() => setMobileOpen(false)} />}
+                  >
+                    <CalendarCheck size={14} className="mr-1" />
+                    Book Consulting
+                  </Button>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>

@@ -1,9 +1,11 @@
 from django.db import models
 
+from config.slug_utils import generate_unique_slug_from_title
+
 
 class Service(models.Model):
     title = models.CharField(max_length=200)
-    slug = models.SlugField(unique=True, blank=True)
+    slug = models.SlugField(max_length=128, unique=True, blank=True)
     short_description = models.CharField(max_length=250)
     full_description = models.TextField()
     icon_name = models.CharField(
@@ -19,9 +21,11 @@ class Service(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            from django.utils.text import slugify
-
-            self.slug = slugify(self.title)
+            self.slug = generate_unique_slug_from_title(
+                self.title,
+                Service,
+                exclude_pk=self.pk,
+            )
         super().save(*args, **kwargs)
 
     def __str__(self):

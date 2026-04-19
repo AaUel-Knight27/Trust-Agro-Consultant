@@ -10,7 +10,8 @@ import { PostCard } from "@/components/shared/PostCard"
 import { cn } from "@/lib/utils"
 import { getPosts } from "@/lib/api"
 
-const categories = ["all", "news", "blog", "announcement"] as const
+/** Filter tabs use content type slugs (see `ContentType` in Django admin). */
+const contentTypeFilters = ["all", "news", "blog", "announcement"] as const
 
 function PostCardSkeleton() {
   return (
@@ -28,11 +29,13 @@ function PostCardSkeleton() {
 }
 
 export default function BlogPage() {
-  const [activeCategory, setActiveCategory] = useState<(typeof categories)[number]>("all")
+  const [activeContentType, setActiveContentType] = useState<
+    (typeof contentTypeFilters)[number]
+  >("all")
 
   const { data: posts, isLoading, isError } = useQuery({
-    queryKey: ["posts", activeCategory],
-    queryFn: () => getPosts(activeCategory === "all" ? undefined : activeCategory),
+    queryKey: ["posts", activeContentType],
+    queryFn: () => getPosts(activeContentType === "all" ? undefined : activeContentType),
   })
 
   return (
@@ -49,19 +52,19 @@ export default function BlogPage() {
 
       <section className="border-b bg-background py-8 px-6">
         <div className="mx-auto flex max-w-7xl flex-wrap gap-2">
-          {categories.map((cat) => (
+          {contentTypeFilters.map((slug) => (
             <Button
-              key={cat}
+              key={slug}
               type="button"
               variant="outline"
               size="sm"
               className={cn(
-                activeCategory === cat &&
+                activeContentType === slug &&
                   "border-transparent bg-green-700 text-white hover:bg-green-800 hover:text-white"
               )}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => setActiveContentType(slug)}
             >
-              {cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+              {slug === "all" ? "All" : slug.charAt(0).toUpperCase() + slug.slice(1)}
             </Button>
           ))}
         </div>

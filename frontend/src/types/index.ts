@@ -9,6 +9,18 @@ export interface Service {
   order: number
 }
 
+export interface ContentTypeRef {
+  id: number
+  name: string
+  slug: string
+}
+
+export interface ContentCategoryRef {
+  id: number
+  name: string
+  slug: string
+}
+
 export interface Post {
   id: number
   title: string
@@ -16,7 +28,8 @@ export interface Post {
   cover_image: string | null
   excerpt: string
   body: string
-  category: "news" | "blog" | "announcement"
+  content_type: ContentTypeRef
+  content_category: ContentCategoryRef | null
   published_at: string
 }
 
@@ -26,4 +39,17 @@ export interface ContactForm {
   phone?: string
   subject: string
   message: string
+}
+
+export interface TeamMember {
+  id: number
+  name: string
+  role: string
+  photo: string | null
+  facebook_url: string
+  linkedin_url: string
+  email: string
+  phone: string
+  experience_short: string
+  order: number
 }

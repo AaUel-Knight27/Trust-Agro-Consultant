@@ -38,15 +38,22 @@ export function PostCard({ post }: PostCardProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-zinc-100">
-            <Newspaper className="size-14 text-zinc-400" strokeWidth={1.25} aria-hidden />
+          <div className="absolute inset-0 flex items-center justify-center bg-muted">
+            <Newspaper className="size-14 text-muted-foreground" strokeWidth={1.25} aria-hidden />
           </div>
         )}
       </div>
       <CardHeader className="gap-2">
-        <Badge variant="secondary" className="w-fit capitalize">
-          {post.category}
-        </Badge>
+        <div className="flex flex-wrap gap-2">
+          <Badge variant="secondary" className="w-fit capitalize">
+            {post.content_type.name}
+          </Badge>
+          {post.content_category ? (
+            <Badge variant="outline" className="w-fit">
+              {post.content_category.name}
+            </Badge>
+          ) : null}
+        </div>
         <CardTitle className="line-clamp-2 text-lg font-semibold leading-snug">{post.title}</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-1 flex-col gap-3">

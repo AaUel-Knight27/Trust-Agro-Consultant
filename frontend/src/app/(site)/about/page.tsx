@@ -44,7 +44,7 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
-          <div className="flex aspect-video items-center justify-center rounded-xl bg-zinc-100">
+          <div className="flex aspect-video items-center justify-center rounded-xl bg-muted">
             <Leaf className="size-16 text-green-300" strokeWidth={1.25} aria-hidden />
           </div>
         </div>

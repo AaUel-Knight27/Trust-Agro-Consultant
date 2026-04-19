@@ -90,8 +90,11 @@ export default function BlogPostPage({ params }: PageProps) {
 
       <div className="mt-8 flex flex-wrap items-center gap-3">
         <Badge variant="secondary" className="capitalize">
-          {post.category}
+          {post.content_type.name}
         </Badge>
+        {post.content_category ? (
+          <Badge variant="outline">{post.content_category.name}</Badge>
+        ) : null}
         <p className="flex items-center gap-1.5 text-sm text-muted-foreground">
           <CalendarDays className="size-4" aria-hidden />
           {formatDate(post.published_at)}
@@ -100,7 +103,7 @@ export default function BlogPostPage({ params }: PageProps) {
 
       <h1 className="mt-6 text-4xl font-bold tracking-tight">{post.title}</h1>
 
-      <div className="mt-10 max-w-none whitespace-pre-wrap text-base leading-relaxed text-zinc-700">
+      <div className="mt-10 max-w-none whitespace-pre-wrap text-base leading-relaxed text-foreground">
         {post.body}
       </div>
 

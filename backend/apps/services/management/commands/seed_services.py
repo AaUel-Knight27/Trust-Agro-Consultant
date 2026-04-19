@@ -1,5 +1,4 @@
 from django.core.management.base import BaseCommand
-from django.utils.text import slugify
 
 from ...models import Service
 
@@ -98,16 +97,17 @@ class Command(BaseCommand):
         existing_titles = []
 
         for data in SEED_SERVICES:
-            slug = slugify(data['title'])
             defaults = {
-                'title': data['title'],
                 'short_description': data['short_description'],
                 'full_description': data['full_description'],
                 'icon_name': data['icon_name'],
                 'order': data['order'],
                 'is_active': True,
             }
-            obj, created = Service.objects.get_or_create(slug=slug, defaults=defaults)
+            obj, created = Service.objects.get_or_create(
+                title=data['title'],
+                defaults=defaults,
+            )
             if created:
                 created_titles.append(obj.title)
             else:

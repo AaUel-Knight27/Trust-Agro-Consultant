@@ -83,7 +83,7 @@ export default function ServiceDetailPage({ params }: PageProps) {
     <div className="mx-auto max-w-7xl px-6 py-12">
       <div className="grid gap-12 lg:grid-cols-3">
         <article className="space-y-8 lg:col-span-2">
-          <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-zinc-100">
+          <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-muted">
             {coverSrc ? (
               <Image
                 src={coverSrc}
@@ -140,7 +140,7 @@ export default function ServiceDetailPage({ params }: PageProps) {
                   <Link
                     key={s.id}
                     href={`/services/${s.slug}`}
-                    className="flex items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-zinc-50"
+                    className="flex items-center gap-2 rounded-lg border border-border p-3 text-sm transition-colors hover:bg-muted"
                   >
                     <SIcon className="size-4 shrink-0 text-green-600" aria-hidden />
                     <span className="font-medium">{s.title}</span>

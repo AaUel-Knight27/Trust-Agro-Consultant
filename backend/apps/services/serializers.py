@@ -15,9 +15,11 @@ class ServiceListSerializer(serializers.ModelSerializer):
             'cover_image',
             'order',
         ]
+        extra_kwargs = {'slug': {'read_only': True}}
 
 
 class ServiceDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
         fields = '__all__'
+        extra_kwargs = {'slug': {'read_only': True}}

@@ -1,10 +1,11 @@
 from django.contrib import admin
 
+from config.admin_mixins import AutoSlugAdminMixin
+
 from .models import Service
 
 
 @admin.register(Service)
-class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['title', 'order', 'is_active']
+class ServiceAdmin(AutoSlugAdminMixin, admin.ModelAdmin):
+    list_display = ['title', 'slug', 'order', 'is_active']
     list_editable = ['order', 'is_active']
-    prepopulated_fields = {'slug': ('title',)}
