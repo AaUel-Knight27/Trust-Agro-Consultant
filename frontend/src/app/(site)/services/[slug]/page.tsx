@@ -1,7 +1,7 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
+import { BlurImage } from "@/components/shared/BlurImage"
 import { useQuery } from "@tanstack/react-query"
 import { Wheat } from "lucide-react"
 
@@ -83,22 +83,17 @@ export default function ServiceDetailPage({ params }: PageProps) {
     <div className="mx-auto max-w-7xl px-6 py-12">
       <div className="grid gap-12 lg:grid-cols-3">
         <article className="space-y-8 lg:col-span-2">
-          <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-muted">
-            {coverSrc ? (
-              <Image
-                src={coverSrc}
+          {service.cover_image && (
+            <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-muted mb-8">
+              <BlurImage
+                src={coverSrc || ""}
                 alt={service.title}
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 66vw"
                 priority
               />
-            ) : (
-              <div className="flex h-full min-h-[12rem] items-center justify-center">
-                <Icon className="size-20 text-green-300" strokeWidth={1.25} aria-hidden />
-              </div>
-            )}
-          </div>
+            </div>
+          )}
 
           <div className="flex justify-center">
             <div className="flex size-14 items-center justify-center rounded-full bg-green-100 text-green-600">

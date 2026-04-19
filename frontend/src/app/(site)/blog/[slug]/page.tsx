@@ -1,7 +1,7 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
+import { BlurImage } from "@/components/shared/BlurImage"
 import { useQuery } from "@tanstack/react-query"
 import { ArrowLeft, CalendarDays, ChevronRight } from "lucide-react"
 
@@ -75,18 +75,17 @@ export default function BlogPostPage({ params }: PageProps) {
         <span className="line-clamp-1 font-medium text-foreground">{post.title}</span>
       </nav>
 
-      {coverSrc ? (
-        <div className="relative mt-8 h-96 max-h-96 w-full overflow-hidden rounded-xl">
-          <Image
-            src={coverSrc}
+      {post.cover_image && (
+        <div className="relative mt-8 aspect-video w-full overflow-hidden rounded-xl bg-muted">
+          <BlurImage
+            src={coverSrc || ""}
             alt={post.title}
             fill
             className="object-cover"
-            sizes="(max-width: 896px) 100vw, 896px"
             priority
           />
         </div>
-      ) : null}
+      )}
 
       <div className="mt-8 flex flex-wrap items-center gap-3">
         <Badge variant="secondary" className="capitalize">

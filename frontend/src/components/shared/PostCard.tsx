@@ -1,4 +1,4 @@
-import Image from "next/image"
+import { BlurImage } from "./BlurImage"
 import Link from "next/link"
 import { ArrowRight, CalendarDays, Newspaper } from "lucide-react"
 
@@ -28,18 +28,17 @@ export function PostCard({ post }: PostCardProps) {
 
   return (
     <Card className="flex h-full min-h-0 flex-col overflow-hidden transition-shadow hover:shadow-md">
-      <div className="relative aspect-video w-full shrink-0 overflow-hidden">
+      <div className="relative h-48 w-full overflow-hidden rounded-t-lg shrink-0">
         {coverSrc ? (
-          <Image
+          <BlurImage
             src={coverSrc}
             alt={post.title}
             fill
             className="object-cover"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-muted">
-            <Newspaper className="size-14 text-muted-foreground" strokeWidth={1.25} aria-hidden />
+          <div className="absolute inset-0 flex items-center justify-center bg-zinc-100">
+            <Newspaper className="size-14 text-zinc-300" strokeWidth={1.25} aria-hidden />
           </div>
         )}
       </div>

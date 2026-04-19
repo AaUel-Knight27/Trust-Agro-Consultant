@@ -14,6 +14,9 @@ import {
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
 
+import { CloudinaryImage } from './CloudinaryImage'
+import { resolveMediaUrl } from '@/lib/mediaUrl'
+
 const iconMap = {
   ClipboardList,
   BookOpen,
@@ -32,18 +35,28 @@ type ServiceCardProps = {
   short_description: string
   icon_name: string
   slug: string
+  cover_image?: string | null
 }
 
-export function ServiceCard({ title, short_description, icon_name, slug }: ServiceCardProps) {
+export function ServiceCard({ title, short_description, icon_name, slug, cover_image }: ServiceCardProps) {
   const Icon = getLucideIcon(icon_name)
+  const coverSrc = resolveMediaUrl(cover_image)
 
   return (
     <Card
       className={cn(
-        "transition-shadow hover:shadow-md",
+        "transition-shadow hover:shadow-md overflow-hidden",
         "h-full"
       )}
     >
+      <div className="relative h-40 w-full">
+        <CloudinaryImage
+          src={coverSrc}
+          alt={title}
+          fill
+          className="object-cover"
+        />
+      </div>
       <CardHeader className="gap-3">
         <div className="flex size-12 items-center justify-center rounded-lg bg-green-100 text-green-600">
           <Icon className="size-6" aria-hidden />

@@ -5,28 +5,13 @@ import { useQuery } from "@tanstack/react-query"
 import { Newspaper } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { Skeleton } from "@/components/ui/skeleton"
+import { PostCardSkeleton } from "@/components/shared/LoadingSkeleton"
 import { PostCard } from "@/components/shared/PostCard"
 import { cn } from "@/lib/utils"
 import { getPosts } from "@/lib/api"
 
 /** Filter tabs use content type slugs (see `ContentType` in Django admin). */
 const contentTypeFilters = ["all", "news", "blog", "announcement"] as const
-
-function PostCardSkeleton() {
-  return (
-    <div className="flex flex-col overflow-hidden rounded-xl border border-border bg-card ring-1 ring-foreground/10">
-      <Skeleton className="aspect-video w-full rounded-none" />
-      <div className="space-y-3 p-4">
-        <Skeleton className="h-5 w-20 rounded-full" />
-        <Skeleton className="h-5 w-full" />
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-5/6" />
-        <Skeleton className="h-3 w-24" />
-      </div>
-    </div>
-  )
-}
 
 export default function BlogPage() {
   const [activeContentType, setActiveContentType] = useState<

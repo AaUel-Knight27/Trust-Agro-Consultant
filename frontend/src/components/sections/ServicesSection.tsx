@@ -4,21 +4,10 @@ import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
 
 import { Button } from "@/components/ui/button"
-import { Skeleton } from "@/components/ui/skeleton"
+import { ServiceCardSkeleton } from "@/components/shared/LoadingSkeleton"
 import { ServiceCard } from "@/components/shared/ServiceCard"
 import { SectionHeader } from "@/components/shared/SectionHeader"
 import { getServices } from "@/lib/api"
-
-function ServiceCardSkeleton() {
-  return (
-    <div className="flex h-48 flex-col overflow-hidden rounded-xl border border-border bg-card p-4 ring-1 ring-foreground/10">
-      <Skeleton className="size-12 rounded-lg" />
-      <Skeleton className="mt-4 h-5 w-3/4" />
-      <Skeleton className="mt-3 h-4 w-full" />
-      <Skeleton className="mt-2 h-4 w-5/6" />
-    </div>
-  )
-}
 
 export function ServicesSection() {
   const { data: services, isLoading, isError } = useQuery({
@@ -57,6 +46,7 @@ export function ServicesSection() {
                 short_description={service.short_description}
                 icon_name={service.icon_name}
                 slug={service.slug}
+                cover_image={service.cover_image}
               />
             ))}
           </div>
