@@ -44,6 +44,12 @@ export default function ContactPage() {
       return
     }
 
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(formData.email.trim())) {
+      setError("Please enter a valid email address.")
+      return
+    }
+
     setIsSubmitting(true)
     try {
       const payload: ContactForm = {

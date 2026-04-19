@@ -119,7 +119,7 @@ export function TeamSection() {
                         src={photoSrc}
                         alt={member.name}
                         fill
-                        className="object-cover object-top grayscale"
+                        className="object-cover object-top"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       />
                     ) : (

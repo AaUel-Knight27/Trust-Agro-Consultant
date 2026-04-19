@@ -15,6 +15,9 @@ class PostViewSet(viewsets.ReadOnlyModelViewSet):
         content_type = self.request.query_params.get('content_type')
         if content_type:
             qs = qs.filter(content_type__slug=content_type)
+        category = self.request.query_params.get('category')
+        if category:
+            qs = qs.filter(content_category__slug=category)
         return qs
 
     def get_serializer_class(self):

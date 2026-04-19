@@ -1,0 +1,9 @@
+{
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "startCommand": "gunicorn config.wsgi:application --bind 0.0.0.0:$PORT",
+    "restartPolicyType": "ON_FAILURE"
+  }
+}

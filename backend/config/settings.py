@@ -3,8 +3,7 @@ Django settings for Trust Agro Consult (config project).
 """
 
 from pathlib import Path
-from urllib.parse import urlparse
-
+import dj_database_url
 from decouple import Csv, config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,56 +13,16 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
 
 
-def _database_from_url(url: str) -> dict:
-    """Build DATABASES['default'] from DATABASE_URL or fall back to SQLite."""
-    if not url or not url.strip():
-        return {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-
-    parsed = urlparse(url.strip())
-    scheme = (parsed.scheme or '').split('+')[0].lower()
-
-    if scheme == 'sqlite':
-        if ':memory:' in url:
-            return {
-                'ENGINE': 'django.db.backends.sqlite3',
-                'NAME': ':memory:',
-            }
-        path = (parsed.path or '').lstrip('/')
-        if not path:
-            db_path = BASE_DIR / 'db.sqlite3'
-        else:
-            db_path = Path(path)
-            if not db_path.is_absolute():
-                db_path = BASE_DIR / db_path
-        return {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': str(db_path),
-        }
-
-    if scheme in ('postgres', 'postgresql'):
-        return {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': (parsed.path or '/')[1:],
-            'USER': parsed.username or '',
-            'PASSWORD': parsed.password or '',
-            'HOST': parsed.hostname or '',
-            'PORT': str(parsed.port or ''),
-        }
-
-    return {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-
-
 DATABASES = {
-    'default': _database_from_url(config('DATABASE_URL', default='')),
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL', default='sqlite:///db.sqlite3'),
+        conn_max_age=600
+    )
 }
 
 INSTALLED_APPS = [
+    'cloudinary',
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -78,6 +37,13 @@ INSTALLED_APPS = [
     'apps.team',
     'apps.contact',
 ]
+
+import cloudinary
+cloudinary.config(
+    cloud_name=config('CLOUDINARY_CLOUD_NAME'),
+    api_key=config('CLOUDINARY_API_KEY'),
+    api_secret=config('CLOUDINARY_API_SECRET'),
+)
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -134,15 +100,19 @@ STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-]
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ],
 }
+
+# Security (production)
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SESSION_COOKIE_SECURE = not config('DEBUG', default=False, cast=bool)
+CSRF_COOKIE_SECURE = not config('DEBUG', default=False, cast=bool)
