@@ -7,10 +7,11 @@ import { HeroSection } from "@/components/sections/HeroSection"
 import { ServicesSection } from "@/components/sections/ServicesSection"
 import { StatsSection } from "@/components/sections/StatsSection"
 import { TeamSection } from "@/components/sections/TeamSection"
+import { PageTransition } from "@/components/shared/PageTransition"
 
 export default function Home() {
   return (
-    <>
+    <PageTransition>
       <HeroSection />
       <StatsSection />
       <AboutSnippetSection />
@@ -20,6 +21,6 @@ export default function Home() {
       <CollaborationsSection />
       <FAQSection />
       <CTASection />
-    </>
+    </PageTransition>
   )
 }

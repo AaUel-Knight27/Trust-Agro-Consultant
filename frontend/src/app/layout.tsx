@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { Footer } from "@/components/layout/Footer"
 import { Navbar } from "@/components/layout/Navbar"
+import { ScrollToTop } from "@/components/shared/ScrollToTop"
 import { QueryProvider } from "@/providers/QueryProvider"
 import { ThemeProvider } from "@/providers/ThemeProvider"
 
@@ -27,6 +28,7 @@ export default function RootLayout({
             <Navbar />
             <main>{children}</main>
             <Footer />
+            <ScrollToTop />
           </QueryProvider>
         </ThemeProvider>
       </body>

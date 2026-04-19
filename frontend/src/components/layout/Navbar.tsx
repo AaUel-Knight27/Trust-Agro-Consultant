@@ -1,8 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import { usePathname } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
+import { motion } from "framer-motion"
 import {
   BookOpen,
   CalendarCheck,
@@ -67,15 +69,27 @@ const services = [
 function LogoMark() {
   return (
     <Link href="/" className="flex items-center gap-2">
-      <Wheat className="size-7 shrink-0 text-green-600" strokeWidth={2} aria-hidden />
-      <span className="font-semibold">Trust Agro Consult</span>
+      <motion.div 
+        whileHover={{ scale: 1.03 }} 
+        transition={{ duration: 0.2 }}
+        className="flex items-center gap-2"
+      >
+        <Wheat className="size-7 shrink-0 text-green-600" strokeWidth={2} aria-hidden />
+        <span className="font-semibold">Trust Agro Consult</span>
+      </motion.div>
     </Link>
   )
 }
 
 export function Navbar() {
+  const pathname = usePathname()
   const scrolled = useScrolled(10)
   const [mobileOpen, setMobileOpen] = useState(false)
+
+  const isActive = (href: string) => {
+    if (href === '/' && pathname !== '/') return false
+    return pathname === href || pathname.startsWith(href + '/')
+  }
 
   return (
     <header
@@ -97,7 +111,13 @@ export function Navbar() {
             <NavigationMenu className="max-w-none">
               <NavigationMenuList className="flex-wrap justify-center gap-0">
                 <NavigationMenuItem>
-                  <NavigationMenuLink render={<Link href="/" />} className="h-9 px-2.5 py-1.5">
+                  <NavigationMenuLink 
+                    render={<Link href="/" />} 
+                    className={cn(
+                      "h-9 px-2.5 py-1.5 transition-colors hover:text-green-700",
+                      isActive("/") && "text-green-700 font-medium"
+                    )}
+                  >
                     Home
                   </NavigationMenuLink>
                 </NavigationMenuItem>
@@ -110,10 +130,13 @@ export function Navbar() {
                         <li key={href}>
                           <NavigationMenuLink
                             render={<Link href={href} />}
-                            className="w-full justify-start gap-2"
+                            className={cn(
+                              "w-full justify-start gap-2 transition-colors",
+                              isActive(href) && "bg-muted text-green-700 font-medium"
+                            )}
                             closeOnClick
                           >
-                            <Icon className="size-4 shrink-0 text-muted-foreground" />
+                            <Icon className={cn("size-4 shrink-0", isActive(href) ? "text-green-600" : "text-muted-foreground")} />
                             {label}
                           </NavigationMenuLink>
                         </li>
@@ -123,19 +146,37 @@ export function Navbar() {
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuLink render={<Link href="/blog" />} className="h-9 px-2.5 py-1.5">
+                  <NavigationMenuLink 
+                    render={<Link href="/blog" />} 
+                    className={cn(
+                      "h-9 px-2.5 py-1.5 transition-colors hover:text-green-700",
+                      isActive("/blog") && "text-green-700 font-medium"
+                    )}
+                  >
                     News & Blog
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuLink render={<Link href="/about" />} className="h-9 px-2.5 py-1.5">
+                  <NavigationMenuLink 
+                    render={<Link href="/about" />} 
+                    className={cn(
+                      "h-9 px-2.5 py-1.5 transition-colors hover:text-green-700",
+                      isActive("/about") && "text-green-700 font-medium"
+                    )}
+                  >
                     About
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuLink render={<Link href="/contact" />} className="h-9 px-2.5 py-1.5">
+                  <NavigationMenuLink 
+                    render={<Link href="/contact" />} 
+                    className={cn(
+                      "h-9 px-2.5 py-1.5 transition-colors hover:text-green-700",
+                      isActive("/contact") && "text-green-700 font-medium"
+                    )}
+                  >
                     Contact
                   </NavigationMenuLink>
                 </NavigationMenuItem>
@@ -193,7 +234,10 @@ export function Navbar() {
                 <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
                   <Link
                     href="/"
-                    className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    className={cn(
+                      "rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted transition-colors",
+                      isActive("/") && "bg-muted text-green-700"
+                    )}
                     onClick={() => setMobileOpen(false)}
                   >
                     Home
@@ -207,31 +251,43 @@ export function Navbar() {
                     <Link
                       key={href}
                       href={href}
-                      className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm hover:bg-muted"
+                      className={cn(
+                        "flex items-center gap-2 rounded-lg px-3 py-2.5 text-sm hover:bg-muted transition-colors",
+                        isActive(href) && "bg-muted text-green-700 font-medium"
+                      )}
                       onClick={() => setMobileOpen(false)}
                     >
-                      <Icon className="size-4 shrink-0 text-muted-foreground" />
+                      <Icon className={cn("size-4 shrink-0", isActive(href) ? "text-green-600" : "text-muted-foreground")} />
                       {label}
                     </Link>
                   ))}
 
                   <Link
                     href="/blog"
-                    className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    className={cn(
+                      "rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted transition-colors",
+                      isActive("/blog") && "bg-muted text-green-700"
+                    )}
                     onClick={() => setMobileOpen(false)}
                   >
                     News & Blog
                   </Link>
                   <Link
                     href="/about"
-                    className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    className={cn(
+                      "rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted transition-colors",
+                      isActive("/about") && "bg-muted text-green-700"
+                    )}
                     onClick={() => setMobileOpen(false)}
                   >
                     About
                   </Link>
                   <Link
                     href="/contact"
-                    className="rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted"
+                    className={cn(
+                      "rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted transition-colors",
+                      isActive("/contact") && "bg-muted text-green-700"
+                    )}
                     onClick={() => setMobileOpen(false)}
                   >
                     Contact

@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { ChevronDown } from "lucide-react"
+import { motion } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
 
@@ -17,7 +18,12 @@ export function HeroSection() {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 py-20 text-center">
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 py-20 text-center"
+      >
         <p className="mb-4 text-xs font-medium uppercase tracking-widest text-green-700">
           Trusted Since 2021
         </p>
@@ -28,25 +34,37 @@ export function HeroSection() {
           Professional agricultural consulting and training services for farmers across Ethiopia.
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <Button
-            size="lg"
-            nativeButton={false}
-            className="bg-green-700 text-white hover:bg-green-800"
-            render={<Link href="/contact" />}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
           >
-            Get in Touch
-          </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            nativeButton={false}
-            className="border-white text-white hover:bg-white/10"
-            render={<Link href="/about" />}
+            <Button
+              size="lg"
+              nativeButton={false}
+              className="bg-green-700 text-white hover:bg-green-800"
+              render={<Link href="/contact" />}
+            >
+              Get in Touch
+            </Button>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
           >
-            Discover About Us
-          </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              nativeButton={false}
+              className="border-white text-white hover:bg-white/10"
+              render={<Link href="/about" />}
+            >
+              Discover About Us
+            </Button>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 justify-center">
         <ChevronDown className="size-8 animate-bounce text-zinc-400" aria-hidden />
