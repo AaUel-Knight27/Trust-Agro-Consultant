@@ -21,7 +21,6 @@ backend/*.log
 backend/.venv
 backend/.ai
 backend/.idea
-backend/staticfiles/
 *initial*.py
 backend/.env
 backend/db.sqlite3
