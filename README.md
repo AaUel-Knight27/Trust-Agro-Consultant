@@ -14,6 +14,7 @@ https://trust-agro-consult.vercel.app/blog
 ## Local Development
 
 ### Backend
+```bash
   cd backend
   python -m venv venv
   venv\Scripts\activate
@@ -22,8 +23,11 @@ https://trust-agro-consult.vercel.app/blog
   python manage.py migrate
   python manage.py seed_services
   python manage.py runserver
+```
 
 ### Frontend
+  ```bash
   cd frontend
   npm install
   npm run dev
+  ```
