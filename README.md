@@ -1,38 +1,31 @@
 # Trust Agro Consult
 
-Agricultural consulting website rebuild.
+Agricultural consulting and training website for Trust Agro Consult P.L.C, Ethiopia.
+
+## Live
+- Frontend: https://your-app.vercel.app
+- Backend API: https://your-backend.onrender.com
+- Admin: https://your-backend.onrender.com/admin
 
 ## Stack
+- Frontend: Next.js 14, shadcn/ui, Tailwind CSS, TanStack Query — Vercel
+- Backend: Django 5, Django REST Framework, PostgreSQL — Render.com
+- Media: Cloudinary
+- Deployment: Vercel + Render (both free tier)
 
-- Frontend: Next.js 14, shadcn/ui, Tailwind CSS, TanStack Query
-- Backend: Django 5, Django REST Framework, SQLite (dev)
-
-## Development
+## Local Development
 
 ### Backend
-
-```bash
-cd backend
-python -m venv venv
-venv\Scripts\activate    # Windows
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py seed_services
-python manage.py collectstatic --noinput
-python manage.py createsuperuser
-python manage.py runserver
-```
+  cd backend
+  python -m venv venv
+  venv\Scripts\activate
+  pip install -r requirements.txt
+  cp .env.example .env
+  python manage.py migrate
+  python manage.py seed_services
+  python manage.py runserver
 
 ### Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-### Access
-
-- Frontend: http://localhost:3000
-- Backend API: http://127.0.0.1:8000
-- Admin panel: http://127.0.0.1:8000/admin
+  cd frontend
+  npm install
+  npm run dev
