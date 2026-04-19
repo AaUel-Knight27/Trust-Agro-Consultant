@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: trust-agro-backend
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn config.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: ".onrender.com"
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://trust-agro-frontend.vercel.app"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: trust-agro-db
+          property: connectionString
+      - key: CLOUDINARY_CLOUD_NAME
+        value: dldplr1mi
+      - key: CLOUDINARY_API_KEY
+        value: 971937293179592
+      - key: CLOUDINARY_API_SECRET
+        value: rnLvUljWYjoKfCqlC95G0ZxI-bA
+
+databases:
+  - name: trust-agro-db
+    databaseName: trust_agro
+    user: trust_agro_user
