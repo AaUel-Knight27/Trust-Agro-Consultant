@@ -9,7 +9,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.0
       - key: SECRET_KEY
-        generateValue: true
+        value: 4#u9iK3aF!P9m1RzQ6eE@tY0w8NvhLpJ
       - key: DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
