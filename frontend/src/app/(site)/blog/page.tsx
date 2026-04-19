@@ -9,6 +9,7 @@ import { PostCardSkeleton } from "@/components/shared/LoadingSkeleton"
 import { PostCard } from "@/components/shared/PostCard"
 import { cn } from "@/lib/utils"
 import { getPosts } from "@/lib/api"
+import { PageTransition } from "@/components/shared/PageTransition"
 
 /** Filter tabs use content type slugs (see `ContentType` in Django admin). */
 const contentTypeFilters = ["all", "news", "blog", "announcement"] as const
@@ -24,7 +25,7 @@ export default function BlogPage() {
   })
 
   return (
-    <div>
+    <PageTransition>
       <section className="bg-zinc-900 py-24 text-white">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h1 className="text-4xl font-bold tracking-tight md:text-5xl">News & Blog</h1>
@@ -73,6 +74,6 @@ export default function BlogPage() {
           )}
         </div>
       </section>
-    </div>
+    </PageTransition>
   )
 }

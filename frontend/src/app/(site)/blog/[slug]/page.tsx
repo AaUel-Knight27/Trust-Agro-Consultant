@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { getPost } from "@/lib/api"
 import { resolveMediaUrl } from "@/lib/mediaUrl"
+import { PageTransition } from "@/components/shared/PageTransition"
 
 type PageProps = {
   params: { slug: string }
@@ -38,31 +39,32 @@ export default function BlogPostPage({ params }: PageProps) {
 
   if (isLoading) {
     return (
-      <div className="mx-auto max-w-4xl px-6 py-12">
+      <PageTransition className="mx-auto max-w-4xl px-6 py-12">
         <Skeleton className="h-4 w-2/3 max-w-md" />
         <Skeleton className="mt-8 h-64 w-full rounded-xl" />
         <Skeleton className="mt-6 h-8 w-1/2" />
         <Skeleton className="mt-4 h-4 w-full" />
         <Skeleton className="mt-2 h-4 w-full" />
-      </div>
+      </PageTransition>
     )
   }
 
   if (isError || !post) {
     return (
-      <div className="mx-auto max-w-4xl px-6 py-24 text-center">
+      <PageTransition className="mx-auto max-w-4xl px-6 py-24 text-center">
         <h1 className="text-2xl font-semibold">Post not found</h1>
         <Button className="mt-8" nativeButton={false} render={<Link href="/blog" />}>
           Back to Blog
         </Button>
-      </div>
+      </PageTransition>
     )
   }
 
   const coverSrc = resolveMediaUrl(post.cover_image)
 
   return (
-    <article className="mx-auto max-w-4xl px-6 py-12">
+    <PageTransition>
+      <article className="mx-auto max-w-4xl px-6 py-12">
       <nav className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
         <Link href="/" className="hover:text-foreground">
           Home
@@ -112,6 +114,7 @@ export default function BlogPostPage({ params }: PageProps) {
           Back to Blog
         </Button>
       </div>
-    </article>
+      </article>
+    </PageTransition>
   )
 }

@@ -10,6 +10,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { getLucideIcon } from "@/components/shared/ServiceCard"
 import { getService, getServices } from "@/lib/api"
 import { resolveMediaUrl } from "@/lib/mediaUrl"
+import { PageTransition } from "@/components/shared/PageTransition"
 
 type PageProps = {
   params: { slug: string }
@@ -17,7 +18,7 @@ type PageProps = {
 
 function ServiceDetailSkeleton() {
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12">
+    <PageTransition className="mx-auto max-w-7xl px-6 py-12">
       <div className="grid gap-12 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
           <Skeleton className="aspect-video w-full rounded-xl" />
@@ -35,7 +36,7 @@ function ServiceDetailSkeleton() {
           <Skeleton className="h-14 w-full rounded-lg" />
         </div>
       </div>
-    </div>
+    </PageTransition>
   )
 }
 
@@ -67,7 +68,7 @@ export default function ServiceDetailPage({ params }: PageProps) {
 
   if (serviceQuery.isError || !service) {
     return (
-      <div className="mx-auto max-w-7xl px-6 py-24 text-center">
+      <PageTransition className="mx-auto max-w-7xl px-6 py-24 text-center">
         <h1 className="text-2xl font-semibold">Service not found</h1>
         <p className="mt-2 text-muted-foreground">
           We couldn&apos;t load this service. It may have been removed or the link is incorrect.
@@ -75,12 +76,12 @@ export default function ServiceDetailPage({ params }: PageProps) {
         <Button className="mt-8" nativeButton={false} render={<Link href="/services" />}>
           Back to services
         </Button>
-      </div>
+      </PageTransition>
     )
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-6 py-12">
+    <PageTransition className="mx-auto max-w-7xl px-6 py-12">
       <div className="grid gap-12 lg:grid-cols-3">
         <article className="space-y-8 lg:col-span-2">
           {service.cover_image && (
@@ -146,6 +147,6 @@ export default function ServiceDetailPage({ params }: PageProps) {
           </nav>
         </aside>
       </div>
-    </div>
+    </PageTransition>
   )
 }

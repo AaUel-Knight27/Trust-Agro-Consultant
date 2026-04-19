@@ -8,6 +8,9 @@ import { ServiceCardSkeleton } from "@/components/shared/LoadingSkeleton"
 import { ServiceCard } from "@/components/shared/ServiceCard"
 import { SectionHeader } from "@/components/shared/SectionHeader"
 import { getServices } from "@/lib/api"
+import { motion } from "framer-motion"
+import { staggerContainer, scaleIn } from "@/lib/animations"
+import { AnimateOnScroll } from "@/components/shared/AnimateOnScroll"
 
 export function ServicesSection() {
   const { data: services, isLoading, isError } = useQuery({
@@ -38,18 +41,29 @@ export function ServicesSection() {
         ) : !services?.length ? (
           <p className="text-center text-muted-foreground">No services are listed yet.</p>
         ) : (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {services.map((service) => (
-              <ServiceCard
-                key={service.id}
-                title={service.title}
-                short_description={service.short_description}
-                icon_name={service.icon_name}
-                slug={service.slug}
-                cover_image={service.cover_image}
-              />
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+            className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
+          >
+            {services.map((service, index) => (
+              <AnimateOnScroll 
+                key={service.id} 
+                delay={index * 0.08} 
+                variants={scaleIn}
+              >
+                <ServiceCard
+                  title={service.title}
+                  short_description={service.short_description}
+                  icon_name={service.icon_name}
+                  slug={service.slug}
+                  cover_image={service.cover_image}
+                />
+              </AnimateOnScroll>
             ))}
-          </div>
+          </motion.div>
         )}
 
         <div className="flex justify-center">

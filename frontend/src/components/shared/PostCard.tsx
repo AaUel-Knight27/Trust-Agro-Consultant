@@ -27,14 +27,14 @@ export function PostCard({ post }: PostCardProps) {
   const coverSrc = resolveMediaUrl(post.cover_image)
 
   return (
-    <Card className="flex h-full min-h-0 flex-col overflow-hidden transition-shadow hover:shadow-md">
+    <Card className="group flex h-full min-h-0 flex-col overflow-hidden transition-shadow hover:shadow-md">
       <div className="relative h-48 w-full overflow-hidden rounded-t-lg shrink-0">
         {coverSrc ? (
           <BlurImage
             src={coverSrc}
             alt={post.title}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center bg-zinc-100">

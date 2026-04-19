@@ -46,7 +46,7 @@ export function ServiceCard({ title, short_description, icon_name, slug, cover_i
     <Card
       className={cn(
         "transition-shadow hover:shadow-md overflow-hidden",
-        "h-full"
+        "h-full group cursor-pointer"
       )}
     >
       <div className="relative h-40 w-full">
@@ -58,10 +58,10 @@ export function ServiceCard({ title, short_description, icon_name, slug, cover_i
         />
       </div>
       <CardHeader className="gap-3">
-        <div className="flex size-12 items-center justify-center rounded-lg bg-green-100 text-green-600">
+        <div className="flex size-12 items-center justify-center rounded-lg bg-green-100 text-green-600 transition-transform duration-200 group-hover:scale-110">
           <Icon className="size-6" aria-hidden />
         </div>
-        <CardTitle className="text-lg font-semibold leading-snug">{title}</CardTitle>
+        <CardTitle className="text-lg font-semibold leading-snug group-hover:text-green-700 transition-colors">{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <p className="line-clamp-2 text-sm text-muted-foreground">{short_description}</p>

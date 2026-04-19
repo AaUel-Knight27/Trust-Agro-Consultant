@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { ServiceCardSkeleton } from "@/components/shared/LoadingSkeleton"
 import { ServiceCard } from "@/components/shared/ServiceCard"
 import { getServices } from "@/lib/api"
+import { PageTransition } from "@/components/shared/PageTransition"
 
 export default function ServicesPage() {
   const { data: services, isLoading, isError } = useQuery({
@@ -15,7 +16,7 @@ export default function ServicesPage() {
   })
 
   return (
-    <div>
+    <PageTransition>
       <section className="bg-zinc-900 py-24 text-white">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h1 className="text-4xl font-bold tracking-tight md:text-5xl">Our Services</h1>
@@ -66,6 +67,6 @@ export default function ServicesPage() {
           </Button>
         </div>
       </section>
-    </div>
+    </PageTransition>
   )
 }

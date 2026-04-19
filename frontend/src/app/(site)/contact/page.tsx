@@ -9,6 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import type { ContactForm } from "@/types"
 import { submitContact } from "@/lib/api"
+import { PageTransition } from "@/components/shared/PageTransition"
 
 type FormState = {
   full_name: string
@@ -70,7 +71,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div>
+    <PageTransition>
       <section className="bg-zinc-900 py-24 text-white">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h1 className="text-4xl font-bold tracking-tight md:text-5xl">Contact Us</h1>
@@ -189,6 +190,6 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
-    </div>
+    </PageTransition>
   )
 }

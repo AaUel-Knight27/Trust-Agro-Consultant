@@ -5,10 +5,11 @@ import { CTASection } from "@/components/sections/CTASection"
 import { StatsSection } from "@/components/sections/StatsSection"
 import { TeamSection } from "@/components/sections/TeamSection"
 import { SectionHeader } from "@/components/shared/SectionHeader"
+import { PageTransition } from "@/components/shared/PageTransition"
 
 export default function AboutPage() {
   return (
-    <div>
+    <PageTransition>
       <section className="bg-zinc-900 py-24 text-white">
         <div className="mx-auto max-w-7xl px-6 text-center">
           <h1 className="text-4xl font-bold tracking-tight md:text-5xl">About Us</h1>
@@ -54,6 +55,6 @@ export default function AboutPage() {
       <TeamSection />
       <CollaborationsSection />
       <CTASection />
-    </div>
+    </PageTransition>
   )
 }
