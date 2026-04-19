@@ -3,9 +3,7 @@
 Agricultural consulting and training website for Trust Agro Consult P.L.C, Ethiopia.
 
 ## Live
-- Frontend: https://your-app.vercel.app
-- Backend API: https://your-backend.onrender.com
-- Admin: https://your-backend.onrender.com/admin
+https://trust-agro-consult.vercel.app/blog
 
 ## Stack
 - Frontend: Next.js 14, shadcn/ui, Tailwind CSS, TanStack Query — Vercel
