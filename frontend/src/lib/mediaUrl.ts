@@ -7,9 +7,7 @@ export function resolveMediaUrl(path: string | null | undefined): string | null 
     return path
   }
 
-  // Fallback to local API URL
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? ""
-  const cleanPath = path.startsWith("/") ? path : `/${path}`
-
-  return `${baseUrl}${cleanPath}`
+  // Return the path directly, expecting the backend to provide full Cloudinary URLs.
+  // If it's a relative path, we just return it so next/image can attempt to resolve it or fail gracefully.
+  return path
 }
