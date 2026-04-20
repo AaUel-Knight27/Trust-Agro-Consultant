@@ -23,8 +23,8 @@ DATABASES = {
 }
 
 INSTALLED_APPS = [
-    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,6 +73,8 @@ STORAGES = {
     },
 }
 
+# WhiteNoise settings
+WHITENOISE_USE_FINDERS = True
 WHITENOISE_MANIFEST_STRICT = False
 
 MIDDLEWARE = [
@@ -163,8 +165,8 @@ REST_FRAMEWORK = {
     ],
 }
 
-# Render.com specific
-if not config('DEBUG', default=True, cast=bool):
+# Render.com specific production settings
+if not DEBUG:
     SECURE_SSL_REDIRECT = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SESSION_COOKIE_SECURE = True
