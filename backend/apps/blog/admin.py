@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from django_summernote.admin import SummernoteModelAdmin
 
 from config.admin_mixins import AutoSlugAdminMixin
 
@@ -20,8 +19,7 @@ class ContentCategoryAdmin(AutoSlugAdminMixin, admin.ModelAdmin):
 
 
 @admin.register(Post)
-class PostAdmin(AutoSlugAdminMixin, SummernoteModelAdmin):
-    summernote_fields = ('body',)
+class PostAdmin(AutoSlugAdminMixin, admin.ModelAdmin):
     fieldsets = (
         ('Content', {
             'fields': ('title', 'content_type', 'content_category', 'excerpt', 'body')

@@ -23,7 +23,6 @@ DATABASES = {
 }
 
 INSTALLED_APPS = [
-    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +41,6 @@ INSTALLED_APPS = [
     'apps.testimonials',
     'apps.gallery',
     'apps.team',
-    'django_summernote',
 ]
 
 # ─── Cloudinary ────────────────────────────────────────────────
@@ -164,59 +162,6 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken', 'x-requested-with',
 ]
 
-# ─── Jazzmin Settings ──────────────────────────────────────────
-JAZZMIN_SETTINGS = {
-    "site_title": "Trust Agro Admin",
-    "site_header": "Trust Agro",
-    "site_brand": "Trust Agro Consult",
-    "welcome_sign": "Welcome to Trust Agro Administration",
-    "copyright": "Trust Agro Consult Ltd",
-    "show_sidebar": True,
-    "navigation_expanded": True,
-}
-
-JAZZMIN_UI_TWEAKS = {
-    "navbar_small_text": False,
-    "footer_small_text": False,
-    "body_small_text": False,
-    "brand_small_text": False,
-    "brand_colour": "navbar-success",
-    "accent": "accent-teal",
-    "navbar": "navbar-dark",
-    "no_navbar_border": False,
-    "navbar_fixed": False,
-    "layout_boxed": False,
-    "footer_fixed": False,
-    "sidebar_fixed": False,
-    "sidebar": "sidebar-dark-success",
-    "sidebar_nav_small_text": False,
-    "sidebar_disable_expand": False,
-    "sidebar_nav_child_indent": False,
-    "sidebar_nav_compact_style": False,
-    "sidebar_nav_legacy_style": False,
-    "sidebar_nav_flat_style": False,
-    "theme": "flatly",
-    "dark_mode_theme": None,
-}
-
-# Summernote settings
-SUMMERNOTE_CONFIG = {
-    'iframe': True,
-    'summernote': {
-        'width': '100%',
-        'height': '400',
-        'toolbar': [
-            ['style', ['style']],
-            ['font', ['bold', 'underline', 'clear']],
-            ['fontname', ['fontname']],
-            ['color', ['color']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['table', ['table']],
-            ['insert', ['link', 'picture', 'video']],
-            ['view', ['fullscreen', 'codeview', 'help']],
-        ],
-    },
-}
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': [

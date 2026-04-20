@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from django_summernote.admin import SummernoteModelAdmin
 
 from config.admin_mixins import AutoSlugAdminMixin
 
@@ -8,8 +7,7 @@ from .models import Service
 
 
 @admin.register(Service)
-class ServiceAdmin(AutoSlugAdminMixin, SummernoteModelAdmin):
-    summernote_fields = ('full_description',)
+class ServiceAdmin(AutoSlugAdminMixin, admin.ModelAdmin):
     fieldsets = (
         ('General Information', {
             'fields': ('title', 'icon_name', 'short_description', 'full_description')

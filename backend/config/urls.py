@@ -16,5 +16,4 @@ urlpatterns = [
     path('api/core/', include('apps.core.urls')),
     path('api/testimonials/', include('apps.testimonials.urls')),
     path('api/gallery/', include('apps.gallery.urls')),
-    path('summernote/', include('django_summernote.urls')),
 ]
