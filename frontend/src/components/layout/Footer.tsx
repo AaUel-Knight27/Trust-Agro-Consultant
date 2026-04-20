@@ -1,5 +1,7 @@
+"use client"
 import Link from "next/link"
 import { Mail, MapPin, Phone, Wheat } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 import { Separator } from "@/components/ui/separator"
 
@@ -13,6 +15,9 @@ const services = [
 ] as const
 
 export function Footer() {
+  const t = useTranslations('footer')
+  const tNav = useTranslations('nav')
+
   return (
     <footer className="bg-zinc-900 px-6 py-16 text-zinc-100">
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-4">
@@ -22,12 +27,12 @@ export function Footer() {
             <h3 className="text-lg font-semibold leading-tight">Trust Agro Consult</h3>
           </div>
           <p className="text-sm text-zinc-400">
-            Professional agricultural consulting and training services across Ethiopia since 2021.
+            {t('description')}
           </p>
         </div>
 
         <div className="flex flex-col gap-4">
-          <h4 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">Our Services</h4>
+          <h4 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">{t('services')}</h4>
           <ul className="flex flex-col gap-2">
             {services.map(({ href, label }) => (
               <li key={href}>
@@ -45,17 +50,17 @@ export function Footer() {
         <div className="flex flex-col gap-4">
           <h4 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">Quick Links</h4>
           <ul className="flex flex-col gap-2">
-            <li><Link href="/" className="text-sm text-zinc-300 transition-colors hover:text-white">Home</Link></li>
-            <li><Link href="/gallery" className="text-sm text-zinc-300 transition-colors hover:text-white">Gallery</Link></li>
-            <li><Link href="/blog" className="text-sm text-zinc-300 transition-colors hover:text-white">News & Blog</Link></li>
-            <li><Link href="/about" className="text-sm text-zinc-300 transition-colors hover:text-white">About Us</Link></li>
-            <li><Link href="/contact" className="text-sm text-zinc-300 transition-colors hover:text-white">Contact</Link></li>
+            <li><Link href="/" className="text-sm text-zinc-300 transition-colors hover:text-white">{tNav('home')}</Link></li>
+            <li><Link href="/gallery" className="text-sm text-zinc-300 transition-colors hover:text-white">{tNav('gallery')}</Link></li>
+            <li><Link href="/blog" className="text-sm text-zinc-300 transition-colors hover:text-white">{tNav('blog')}</Link></li>
+            <li><Link href="/about" className="text-sm text-zinc-300 transition-colors hover:text-white">{tNav('about')}</Link></li>
+            <li><Link href="/contact" className="text-sm text-zinc-300 transition-colors hover:text-white">{tNav('contact')}</Link></li>
           </ul>
         </div>
 
         <div className="flex flex-col gap-4">
           <h4 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">
-            Get In Touch
+            {t('contact')}
           </h4>
           <ul className="flex flex-col gap-3 text-sm text-zinc-300">
             <li className="flex items-start">
@@ -85,7 +90,7 @@ export function Footer() {
 
       <div className="mx-auto max-w-7xl">
         <p className="py-4 text-center text-xs text-zinc-500">
-          © 2026 Trust Agro Consult P.L.C. All rights reserved.
+          {t('copyright')}
         </p>
       </div>
     </footer>

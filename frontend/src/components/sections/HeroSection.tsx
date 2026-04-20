@@ -3,10 +3,13 @@
 import Link from "next/link"
 import { ChevronDown } from "lucide-react"
 import { motion } from "framer-motion"
+import { useTranslations } from 'next-intl'
 
 import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
+  const t = useTranslations('hero')
+
   return (
     <section className="relative flex min-h-screen flex-col justify-center overflow-hidden bg-zinc-900">
       <div
@@ -25,13 +28,13 @@ export function HeroSection() {
         className="relative z-10 mx-auto flex max-w-7xl flex-col items-center px-6 py-20 text-center"
       >
         <p className="mb-4 text-xs font-medium uppercase tracking-widest text-green-700">
-          Trusted Since 2021
+          {t('tag')}
         </p>
         <h1 className="text-5xl font-bold tracking-tight text-white md:text-7xl">
-          Farm With Confidence
+          {t('headline')}
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-xl text-zinc-300">
-          Professional agricultural consulting and training services for farmers across Ethiopia.
+          {t('subtext')}
         </p>
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <motion.div
@@ -43,9 +46,9 @@ export function HeroSection() {
               size="lg"
               nativeButton={false}
               className="bg-green-700 text-white hover:bg-green-800"
-              render={<Link href="/contact" />}
+              render={<Link href="/book" />}
             >
-              Get in Touch
+              {t('cta1')}
             </Button>
           </motion.div>
           <motion.div
@@ -60,7 +63,7 @@ export function HeroSection() {
               className="border-white text-white hover:bg-white/10"
               render={<Link href="/about" />}
             >
-              Discover About Us
+              {t('cta2')}
             </Button>
           </motion.div>
         </div>

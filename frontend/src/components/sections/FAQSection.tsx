@@ -7,6 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { SectionHeader } from "@/components/shared/SectionHeader"
+import { useTranslations } from 'next-intl'
 
 const faqs = [
   {
@@ -28,10 +29,12 @@ const faqs = [
 ] as const
 
 export function FAQSection() {
+  const t = useTranslations('faq')
+
   return (
     <section className="py-20 px-6">
       <div className="mx-auto max-w-3xl space-y-10">
-        <SectionHeader tag="FAQ" title="Common Questions" centered />
+        <SectionHeader tag={t('tag')} title={t('title')} centered />
 
         <Accordion multiple={false} defaultValue={[]}>
           {faqs.map((item, index) => (
