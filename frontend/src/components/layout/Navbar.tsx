@@ -147,13 +147,13 @@ export function Navbar() {
 
                 <NavigationMenuItem>
                   <NavigationMenuLink 
-                    render={<Link href="/blog" />} 
+                    render={<Link href="/gallery" />} 
                     className={cn(
                       "h-9 px-2.5 py-1.5 transition-colors hover:text-green-700",
-                      isActive("/blog") && "text-green-700 font-medium"
+                      isActive("/gallery") && "text-green-700 font-medium"
                     )}
                   >
-                    News & Blog
+                    Gallery
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
@@ -263,14 +263,14 @@ export function Navbar() {
                   ))}
 
                   <Link
-                    href="/blog"
+                    href="/gallery"
                     className={cn(
                       "rounded-lg px-3 py-2.5 text-sm font-medium hover:bg-muted transition-colors",
-                      isActive("/blog") && "bg-muted text-green-700"
+                      isActive("/gallery") && "bg-muted text-green-700"
                     )}
                     onClick={() => setMobileOpen(false)}
                   >
-                    News & Blog
+                    Gallery
                   </Link>
                   <Link
                     href="/about"

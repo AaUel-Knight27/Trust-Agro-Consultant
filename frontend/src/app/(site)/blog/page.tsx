@@ -11,6 +11,8 @@ import { cn } from "@/lib/utils"
 import { getPosts } from "@/lib/api"
 import { PageTransition } from "@/components/shared/PageTransition"
 
+import { SearchBar } from "@/components/shared/SearchBar"
+
 /** Filter tabs use content type slugs (see `ContentType` in Django admin). */
 const contentTypeFilters = ["all", "news", "blog", "announcement"] as const
 
@@ -18,10 +20,14 @@ export default function BlogPage() {
   const [activeContentType, setActiveContentType] = useState<
     (typeof contentTypeFilters)[number]
   >("all")
+  const [searchQuery, setSearchQuery] = useState("")
 
   const { data: posts, isLoading, isError } = useQuery({
-    queryKey: ["posts", activeContentType],
-    queryFn: () => getPosts(activeContentType === "all" ? undefined : activeContentType),
+    queryKey: ["posts", activeContentType, searchQuery],
+    queryFn: () => getPosts({
+      category: activeContentType === "all" ? undefined : activeContentType,
+      search: searchQuery || undefined,
+    }),
   })
 
   return (
@@ -37,22 +43,27 @@ export default function BlogPage() {
       </section>
 
       <section className="border-b bg-background py-8 px-6">
-        <div className="mx-auto flex max-w-7xl flex-wrap gap-2">
-          {contentTypeFilters.map((slug) => (
-            <Button
-              key={slug}
-              type="button"
-              variant="outline"
-              size="sm"
-              className={cn(
-                activeContentType === slug &&
-                  "border-transparent bg-green-700 text-white hover:bg-green-800 hover:text-white"
-              )}
-              onClick={() => setActiveContentType(slug)}
-            >
-              {slug === "all" ? "All" : slug.charAt(0).toUpperCase() + slug.slice(1)}
-            </Button>
-          ))}
+        <div className="mx-auto flex max-w-7xl flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+          <div className="flex gap-2 flex-wrap">
+            {contentTypeFilters.map((slug) => (
+              <Button
+                key={slug}
+                type="button"
+                variant="outline"
+                size="sm"
+                className={cn(
+                  activeContentType === slug &&
+                    "border-transparent bg-green-700 text-white hover:bg-green-800 hover:text-white"
+                )}
+                onClick={() => setActiveContentType(slug)}
+              >
+                {slug === "all" ? "All" : slug.charAt(0).toUpperCase() + slug.slice(1)}
+              </Button>
+            ))}
+          </div>
+          <div className="w-full sm:w-64">
+            <SearchBar onSearch={setSearchQuery} />
+          </div>
         </div>
       </section>
 
@@ -63,11 +74,30 @@ export default function BlogPage() {
               Couldn&apos;t load posts. Please try again later.
             </p>
           ) : isLoading ? (
-            Array.from({ length: 6 }).map((_, i) => <PostCardSkeleton key={i} />)
+            <>
+              {searchQuery && (
+                <p className="col-span-full text-center text-muted-foreground mb-4 animate-pulse">
+                  Searching for &quot;{searchQuery}&quot;...
+                </p>
+              )}
+              {Array.from({ length: 6 }).map((_, i) => <PostCardSkeleton key={i} />)}
+            </>
           ) : !posts?.length ? (
             <div className="col-span-full flex flex-col items-center justify-center gap-3 py-16 text-muted-foreground">
-              <Newspaper className="size-12 text-zinc-400" strokeWidth={1.25} aria-hidden />
-              <p className="text-lg font-medium">No posts yet</p>
+              {searchQuery ? (
+                <>
+                  <div className="size-16 rounded-full bg-muted flex items-center justify-center mb-2">
+                    <Newspaper className="size-8 text-zinc-400" strokeWidth={1.25} aria-hidden />
+                  </div>
+                  <p className="text-xl font-medium text-foreground">No results for &quot;{searchQuery}&quot;</p>
+                  <p className="text-zinc-500">Try a different keyword or category</p>
+                </>
+              ) : (
+                <>
+                  <Newspaper className="size-12 text-zinc-400" strokeWidth={1.25} aria-hidden />
+                  <p className="text-lg font-medium">No posts yet</p>
+                </>
+              )}
             </div>
           ) : (
             posts.map((post) => <PostCard key={post.id} post={post} />)

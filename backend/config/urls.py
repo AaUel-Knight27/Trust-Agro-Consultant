@@ -13,4 +13,7 @@ urlpatterns = [
     path('api/services/', include('apps.services.urls')),
     path('api/team/', include('apps.team.urls')),
     path('api/contact/', include('apps.contact.urls')),
+    path('api/core/', include('apps.core.urls')),
+    path('api/testimonials/', include('apps.testimonials.urls')),
+    path('api/gallery/', include('apps.gallery.urls')),
 ]

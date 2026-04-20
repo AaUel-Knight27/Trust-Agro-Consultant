@@ -3,6 +3,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from .serializers import ContactSubmissionSerializer
+from .email_utils import send_contact_notification
 
 
 class ContactSubmissionView(CreateAPIView):
@@ -12,7 +13,11 @@ class ContactSubmissionView(CreateAPIView):
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
+        submission = serializer.save()
+
+        # Send email notification (non-blocking, errors are caught internally)
+        send_contact_notification(submission)
+
         return Response(
             {
                 'message': (

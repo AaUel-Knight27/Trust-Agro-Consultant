@@ -8,9 +8,10 @@ import { ArrowLeft, CalendarDays, ChevronRight } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
-import { getPost } from "@/lib/api"
+import { getPost, getRelatedPosts } from "@/lib/api"
 import { getSafeImageSrc } from "@/lib/imageUtils"
 import { PageTransition } from "@/components/shared/PageTransition"
+import { PostCard } from "@/components/shared/PostCard"
 
 type PageProps = {
   params: { slug: string }
@@ -34,6 +35,12 @@ export default function BlogPostPage({ params }: PageProps) {
   const { data: post, isLoading, isError } = useQuery({
     queryKey: ["post", slug],
     queryFn: () => getPost(slug),
+    enabled: Boolean(slug),
+  })
+
+  const { data: relatedPosts } = useQuery({
+    queryKey: ["related-posts", slug],
+    queryFn: () => getRelatedPosts(slug),
     enabled: Boolean(slug),
   })
 
@@ -114,6 +121,17 @@ export default function BlogPostPage({ params }: PageProps) {
           Back to Blog
         </Button>
       </div>
+
+      {relatedPosts && relatedPosts.length > 0 && (
+        <div className="mt-16 pt-8 border-t">
+          <h3 className="text-2xl font-bold mb-8">Related Articles</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {relatedPosts.map(post => (
+              <PostCard key={post.id} post={post} />
+            ))}
+          </div>
+        </div>
+      )}
       </article>
     </PageTransition>
   )

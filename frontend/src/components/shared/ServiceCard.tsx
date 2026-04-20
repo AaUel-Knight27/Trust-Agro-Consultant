@@ -9,6 +9,11 @@ import {
   Stethoscope,
   Wheat,
   Wrench,
+  Award,
+  CheckCircle2,
+  MapPin,
+  Users,
+  LucideIcon,
 } from "lucide-react"
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -17,14 +22,18 @@ import { cn } from "@/lib/utils"
 import { CloudinaryImage } from './CloudinaryImage'
 import { getSafeImageSrc } from '@/lib/imageUtils'
 
-const iconMap = {
+const iconMap: Record<string, LucideIcon> = {
   ClipboardList,
   BookOpen,
   Stethoscope,
   Wheat,
   ShoppingBasket,
   Wrench,
-} as Record<string, React.ComponentType<{ size?: number | string; className?: string }>>
+  Award,
+  CheckCircle2,
+  MapPin,
+  Users,
+}
 
 export function getLucideIcon(name: string) {
   return iconMap[name] || HelpCircle

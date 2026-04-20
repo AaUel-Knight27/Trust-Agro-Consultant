@@ -5,6 +5,7 @@ import "./globals.css"
 import { Footer } from "@/components/layout/Footer"
 import { Navbar } from "@/components/layout/Navbar"
 import { ScrollToTop } from "@/components/shared/ScrollToTop"
+import { WhatsAppButton } from "@/components/shared/WhatsAppButton"
 import { QueryProvider } from "@/providers/QueryProvider"
 import { ThemeProvider } from "@/providers/ThemeProvider"
 
@@ -28,6 +29,7 @@ export default function RootLayout({
             <Navbar />
             <main>{children}</main>
             <Footer />
+            <WhatsAppButton />
             <ScrollToTop />
           </QueryProvider>
         </ThemeProvider>
