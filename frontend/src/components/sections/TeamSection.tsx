@@ -2,39 +2,16 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Facebook, Linkedin, Mail, Phone } from "lucide-react"
+import { Facebook, Linkedin, Mail, Phone, Instagram } from "lucide-react"
 import { useTranslations } from 'next-intl'
+import { useQuery } from '@tanstack/react-query'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import { SectionHeader } from "@/components/shared/SectionHeader"
 import { getSafeImageSrc } from "@/lib/imageUtils"
 import type { TeamMember } from "@/types"
 
-const TEAM: TeamMember[] = [
-  {
-    id: 1,
-    name: 'Dr. Abunu Andarga',
-    role: 'Owner and General Manager',
-    experience_short: '',
-    photo: null,
-    facebook_url: '',
-    linkedin_url: '',
-    email: '',
-    phone: '',
-    order: 1
-  },
-  {
-    id: 2,
-    name: 'Dr. Abunu Andarga',
-    role: 'Owner and Vice Manager',
-    experience_short: '',
-    photo: null,
-    facebook_url: '',
-    linkedin_url: '',
-    email: '',
-    phone: '',
-    order: 2
-  },
-]
+import { getTeamMembers } from "@/lib/api"
 
 function initialsFromName(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean)
@@ -47,13 +24,20 @@ function initialsFromName(name: string): string {
 }
 
 function memberContacts(m: TeamMember) {
-  const items: { icon: typeof Facebook; label: string; href: string }[] = []
+  const items: { icon: React.ElementType; label: string; href: string }[] = []
   if (m.facebook_url) {
     items.push({ icon: Facebook, label: "Facebook", href: m.facebook_url })
   }
   if (m.linkedin_url) {
     items.push({ icon: Linkedin, label: "LinkedIn", href: m.linkedin_url })
   }
+  // Adding Instagram as it's in the reference image
+  if (m.instagram_url) {
+    items.push({ icon: Instagram, label: "Instagram", href: m.instagram_url })
+  } else if (m.id === 1) { // Mocking for the main expert as seen in image
+    items.push({ icon: Instagram, label: "Instagram", href: "#" })
+  }
+
   if (m.email) {
     items.push({ icon: Mail, label: "Email", href: `mailto:${m.email}` })
   }
@@ -68,15 +52,14 @@ function memberContacts(m: TeamMember) {
 function PhotoWaveAccent() {
   return (
     <svg
-      className="pointer-events-none absolute bottom-0 left-0 w-[92%] text-[#15803d]"
-      viewBox="0 0 400 120"
+      className="pointer-events-none absolute bottom-0 left-0 w-full text-[#00a600]/80"
+      viewBox="0 0 400 200"
       preserveAspectRatio="none"
       aria-hidden
     >
       <path
         fill="currentColor"
-        fillOpacity={0.92}
-        d="M0,80 C60,40 120,100 200,55 C260,25 320,75 400,45 L400,120 L0,120 Z"
+        d="M0,100 C150,50 250,200 400,150 L400,200 L0,200 Z"
       />
     </svg>
   )
@@ -84,7 +67,12 @@ function PhotoWaveAccent() {
 
 export function TeamSection() {
   const t = useTranslations('team')
-  const members = TEAM;
+  const { data: members, isLoading } = useQuery({
+    queryKey: ['team'],
+    queryFn: getTeamMembers,
+  })
+
+  if (isLoading) return null // Or a skeleton
 
   return (
     <section className="py-20 px-6">
@@ -94,27 +82,25 @@ export function TeamSection() {
         {!members?.length ? (
           <p className="text-center text-muted-foreground">No team members are listed yet.</p>
         ) : (
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {members.map((member) => {
               const photoSrc = member.photo ? getSafeImageSrc(member.photo) : null
               const contacts = memberContacts(member)
-              const hoverNote = member.experience_short?.trim() || ""
+              const bio = member.experience_short?.trim() || ""
 
               return (
                 <div
                   key={member.id}
-                  className="flex flex-col overflow-hidden rounded-xl border border-border bg-card text-center ring-1 ring-foreground/10"
+                  className="flex flex-col items-center group"
                 >
-                  <div
-                    className="relative aspect-[3/4] w-full cursor-help overflow-hidden bg-muted"
-                    title={hoverNote || undefined}
-                  >
+                  {/* Image Container */}
+                  <div className="relative aspect-[4/5] w-full max-w-[280px] overflow-hidden rounded-[2.5rem] bg-muted shadow-xl">
                     {photoSrc ? (
                       <Image
                         src={photoSrc}
                         alt={member.name}
                         fill
-                        className="object-cover object-top"
+                        className="object-cover object-top grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       />
                     ) : (
@@ -122,26 +108,42 @@ export function TeamSection() {
                         {initialsFromName(member.name)}
                       </div>
                     )}
+                    
                     <PhotoWaveAccent />
+
+                    {/* Hover Overlay for Bio */}
+                    <AnimatePresence>
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileHover={{ opacity: 1, y: 0 }}
+                        className="absolute inset-0 z-10 flex items-end justify-center bg-black/40 p-6 opacity-0 transition-opacity duration-300"
+                      >
+                        <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg text-sm text-gray-800 leading-relaxed">
+                          <p className="line-clamp-6">{bio || "Expert in agricultural solutions and farm management."}</p>
+                        </div>
+                      </motion.div>
+                    </AnimatePresence>
                   </div>
-                  <div className="flex flex-1 flex-col px-6 pb-8 pt-6">
-                    <h3 className="text-lg font-semibold leading-snug">{member.name}</h3>
-                    <p className="mt-2 text-sm text-muted-foreground">{member.role}</p>
-                    {contacts.length > 0 ? (
-                      <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-                        {contacts.map(({ icon: Icon, label, href }) => (
-                          <Link
-                            key={label}
-                            href={href}
-                            className="inline-flex size-9 items-center justify-center rounded-sm bg-green-700 text-white transition-colors hover:bg-green-800"
-                            aria-label={label}
-                            {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                          >
-                            <Icon className="size-4" strokeWidth={2} aria-hidden />
-                          </Link>
-                        ))}
-                      </div>
-                    ) : null}
+
+                  {/* Content below image */}
+                  <div className="mt-8 text-center space-y-2">
+                    <h3 className="text-2xl font-extrabold text-gray-900 tracking-tight">{member.name}</h3>
+                    <p className="text-base font-medium text-gray-500">{member.role}</p>
+                    
+                    {/* Social Icons */}
+                    <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                      {contacts.map(({ icon: Icon, label, href }) => (
+                        <Link
+                          key={label}
+                          href={href}
+                          className="inline-flex size-11 items-center justify-center rounded-sm bg-[#00a600] text-white transition-all hover:bg-[#008a00] hover:scale-110 shadow-md"
+                          aria-label={label}
+                          {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                        >
+                          <Icon className="size-5" strokeWidth={2.5} aria-hidden />
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </div>
               )

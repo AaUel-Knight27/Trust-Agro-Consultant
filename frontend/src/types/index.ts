@@ -48,6 +48,7 @@ export interface TeamMember {
   photo: string | null
   facebook_url: string
   linkedin_url: string
+  instagram_url?: string
   email: string
   phone: string
   experience_short: string

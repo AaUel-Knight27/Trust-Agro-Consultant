@@ -222,16 +222,20 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="w-full h-[450px]">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5110.547980840509!2d38.78326067058085!3d8.99317341820587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b85371032e8b5%3A0x8bad36741b2652f4!2zTWVkaGFuaWFsZW0gTWFsbCB8IEJvbGUgTWVkaGFuaWFsZW0gfCDhiJjhi7XhiIDhipLhi6vhiIjhiJ0g4Yie4YiNIHwg4Ymm4YiMIOGImOGLs-GKkuGLq-GIiOGInQ!5e0!3m2!1sen!2set!4v1776678976441!5m2!1sen!2set"
-          width="100%"
-          height="100%"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
+      <section className="pb-16 px-6">
+        <div className="mx-auto max-w-7xl overflow-hidden rounded-2xl border border-border shadow-sm">
+          <div className="w-full h-[300px]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d246.28023899883493!2d38.81382753767519!3d9.019551557737914!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2set!4v1776679442417!5m2!1sen!2set"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
       </section>
     </PageTransition>
   )
