@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'apps.services',
     'apps.team',
     'apps.contact',
+    'apps.core',
 ]
 
 # ─── Cloudinary ────────────────────────────────────────────────
