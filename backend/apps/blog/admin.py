@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.utils.html import format_html
+from django_summernote.admin import SummernoteModelAdmin
 
 from config.admin_mixins import AutoSlugAdminMixin
 
@@ -18,24 +20,34 @@ class ContentCategoryAdmin(AutoSlugAdminMixin, admin.ModelAdmin):
 
 
 @admin.register(Post)
-class PostAdmin(AutoSlugAdminMixin, admin.ModelAdmin):
-    fields = [
-        'title',
-        'content_type',
-        'content_category',
-        'excerpt',
-        'body',
-        'cover_image',
-        'is_published',
-    ]
+class PostAdmin(AutoSlugAdminMixin, SummernoteModelAdmin):
+    summernote_fields = ('body',)
+    fieldsets = (
+        ('Content', {
+            'fields': ('title', 'content_type', 'content_category', 'excerpt', 'body')
+        }),
+        ('Media', {
+            'fields': ('cover_image',)
+        }),
+        ('Status', {
+            'fields': ('is_published',)
+        }),
+    )
     list_display = [
+        'image_preview',
         'title',
-        'slug',
         'content_type',
         'content_category',
         'is_published',
         'published_at',
     ]
+    list_display_links = ['title']
     list_filter = ['content_type', 'content_category', 'is_published']
     search_fields = ['title', 'excerpt']
     list_editable = ['is_published']
+
+    def image_preview(self, obj):
+        if obj.cover_image:
+            return format_html('<img src="{}" width="50" height="50" style="object-fit: cover; border-radius: 4px;" />', obj.cover_image.url)
+        return "-"
+    image_preview.short_description = 'Preview'

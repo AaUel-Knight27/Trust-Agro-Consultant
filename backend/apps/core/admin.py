@@ -8,6 +8,21 @@ class SiteStatAdmin(admin.ModelAdmin):
 
 @admin.register(SiteConfig)
 class SiteConfigAdmin(admin.ModelAdmin):
+    fieldsets = (
+        ('Company Info', {
+            'fields': ('company_name', 'tagline', 'description')
+        }),
+        ('Contact Details', {
+            'fields': ('email', 'phone', 'address', 'office_hours')
+        }),
+        ('Social Media', {
+            'fields': ('facebook_url', 'instagram_url', 'whatsapp_number')
+        }),
+        ('Visuals', {
+            'fields': ('logo', 'favicon')
+        }),
+    )
+
     def has_add_permission(self, request):
         return not SiteConfig.objects.exists()
     def has_delete_permission(self, request, obj=None):
