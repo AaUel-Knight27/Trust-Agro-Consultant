@@ -2,14 +2,17 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useQuery } from "@tanstack/react-query"
 import { Facebook, Linkedin, Mail, Phone } from "lucide-react"
 
 import { SectionHeader } from "@/components/shared/SectionHeader"
 import { Skeleton } from "@/components/ui/skeleton"
-import { getTeamMembers } from "@/lib/api"
 import { resolveMediaUrl } from "@/lib/mediaUrl"
 import type { TeamMember } from "@/types"
+
+const TEAM = [
+  { id: 1, name: 'Dr. Abunu Andarga', role: 'Owner and General Manager', initials: 'AA', experience_short: '' },
+  { id: 2, name: 'Dr. Abunu Andarga', role: 'Owner and Vice Manager', initials: 'AA', experience_short: '' },
+]
 
 function initialsFromName(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean)
@@ -75,35 +78,21 @@ function MemberCardSkeleton() {
 }
 
 export function TeamSection() {
-  const { data: members, isLoading, isError } = useQuery({
-    queryKey: ["team"],
-    queryFn: getTeamMembers,
-  })
+  const members = TEAM;
 
   return (
     <section className="py-20 px-6">
       <div className="mx-auto max-w-7xl space-y-12">
         <SectionHeader tag="The Team" title="Our Experts" centered />
 
-        {isError ? (
-          <p className="text-center text-muted-foreground">
-            We couldn&apos;t load the team right now. Please try again later.
-          </p>
-        ) : isLoading ? (
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            <MemberCardSkeleton />
-            <MemberCardSkeleton />
-            <MemberCardSkeleton />
-            <MemberCardSkeleton />
-          </div>
-        ) : !members?.length ? (
+        {!members?.length ? (
           <p className="text-center text-muted-foreground">No team members are listed yet.</p>
         ) : (
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {members.map((member) => {
-              const photoSrc = resolveMediaUrl(member.photo)
-              const contacts = memberContacts(member)
-              const hoverNote = member.experience_short.trim()
+              const photoSrc = (member as any).photo ? resolveMediaUrl((member as any).photo) : null
+              const contacts = memberContacts(member as any)
+              const hoverNote = member.experience_short?.trim() || ""
 
               return (
                 <div
