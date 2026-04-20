@@ -15,7 +15,7 @@ const services = [
 export function Footer() {
   return (
     <footer className="bg-zinc-900 px-6 py-16 text-zinc-100">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-3">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-12 md:grid-cols-4">
         <div className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
             <Wheat className="size-8 shrink-0 text-green-500" aria-hidden />
@@ -39,6 +39,17 @@ export function Footer() {
                 </Link>
               </li>
             ))}
+          </ul>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <h4 className="text-sm font-semibold uppercase tracking-wider text-zinc-400">Quick Links</h4>
+          <ul className="flex flex-col gap-2">
+            <li><Link href="/" className="text-sm text-zinc-300 transition-colors hover:text-white">Home</Link></li>
+            <li><Link href="/gallery" className="text-sm text-zinc-300 transition-colors hover:text-white">Gallery</Link></li>
+            <li><Link href="/blog" className="text-sm text-zinc-300 transition-colors hover:text-white">News & Blog</Link></li>
+            <li><Link href="/about" className="text-sm text-zinc-300 transition-colors hover:text-white">About Us</Link></li>
+            <li><Link href="/contact" className="text-sm text-zinc-300 transition-colors hover:text-white">Contact</Link></li>
           </ul>
         </div>
 

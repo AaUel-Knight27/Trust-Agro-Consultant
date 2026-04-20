@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Service, Post, ContactForm, TeamMember } from '@/types'
+import { Service, Post, ContactForm, TeamMember, SiteStat, SiteConfig, Testimonial, GalleryCategory, GalleryImage } from '@/types'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000'
 
@@ -36,10 +36,18 @@ export const getServices = (): Promise<Service[]> =>
 export const getService = (slug: string): Promise<Service> =>
   api.get(`/api/services/${slug}/`).then(r => r.data)
 
-export const getPosts = (category?: string): Promise<Post[]> => {
-  const params = category ? { category } : {}
-  return api.get('/api/blog/posts/', { params }).then(r => r.data)
+export const getPosts = (params?: {
+  category?: string
+  search?: string
+}): Promise<Post[]> => {
+  const queryParams: Record<string, string> = {}
+  if (params?.category) queryParams.category = params.category
+  if (params?.search) queryParams.search = params.search
+  return api.get('/api/blog/posts/', { params: queryParams }).then(r => r.data)
 }
+
+export const getRelatedPosts = (slug: string): Promise<Post[]> =>
+  api.get(`/api/blog/posts/${slug}/related/`).then(r => r.data)
 
 export const getPost = (slug: string): Promise<Post> =>
   api.get(`/api/blog/posts/${slug}/`).then(r => r.data)
@@ -49,3 +57,23 @@ export const getTeamMembers = (): Promise<TeamMember[]> =>
 
 export const submitContact = (data: ContactForm): Promise<{ message: string }> =>
   api.post('/api/contact/', data).then(r => r.data)
+
+export const getSiteStats = (): Promise<SiteStat[]> =>
+  api.get('/api/core/stats/').then(r => r.data)
+
+export const getSiteConfig = (): Promise<SiteConfig> =>
+  api.get('/api/core/config/').then(r => r.data)
+
+export const getTestimonials = (featured?: boolean): Promise<Testimonial[]> => {
+  const params = featured ? { featured: 'true' } : {}
+  return api.get('/api/testimonials/', { params }).then(r => r.data)
+}
+
+export const getGalleryImages = (categorySlug?: string): Promise<GalleryImage[]> => {
+  const params = categorySlug ? { category__slug: categorySlug } : {}
+  return api.get('/api/gallery/', { params }).then(r => r.data)
+}
+
+export const getGalleryCategories = (): Promise<GalleryCategory[]> =>
+  api.get('/api/gallery/categories/').then(r => r.data)
+

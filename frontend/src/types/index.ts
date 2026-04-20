@@ -53,3 +53,49 @@ export interface TeamMember {
   experience_short: string
   order: number
 }
+
+export interface SiteStat {
+  id: number
+  label: string
+  value: string
+  suffix: string
+  icon_name: string
+  order: number
+}
+
+export interface SiteConfig {
+  phone: string
+  email: string
+  address: string
+  whatsapp_number: string
+  booking_url: string
+  founded_year: number
+}
+
+export interface Testimonial {
+  id: number
+  full_name: string
+  role: string
+  organization: string
+  photo: string | null
+  message: string
+  rating: number
+  order: number
+}
+
+export interface GalleryCategory {
+  id: number
+  name: string
+  slug: string
+  image_count: number
+}
+
+export interface GalleryImage {
+  id: number
+  title: string
+  description: string
+  image: string
+  category_name: string | null
+  category_slug: string | null
+  order: number
+}
