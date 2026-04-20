@@ -99,3 +99,15 @@ export interface GalleryImage {
   category_slug: string | null
   order: number
 }
+
+export interface ConsultationBooking {
+  full_name: string
+  email: string
+  phone: string
+  service_type: string
+  farm_size?: string
+  preferred_date: string
+  preferred_time: string
+  location: string
+  notes?: string
+}

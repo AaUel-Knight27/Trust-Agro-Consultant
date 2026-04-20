@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages } from 'next-intl/server'
 
 import "./globals.css"
 import { Footer } from "@/components/layout/Footer"
@@ -16,23 +18,29 @@ export const metadata: Metadata = {
   description: "Agricultural consulting and training in Ethiopia",
 }
 
-export default function RootLayout({
+export default async function LocaleLayout({
   children,
-}: Readonly<{
+  params: { locale }
+}: {
   children: React.ReactNode
-}>) {
+  params: { locale: string }
+}) {
+  const messages = await getMessages()
+
   return (
-    <html lang="en" suppressHydrationWarning className={inter.variable}>
+    <html lang={locale} suppressHydrationWarning className={inter.variable}>
       <body className="font-sans antialiased">
-        <ThemeProvider>
-          <QueryProvider>
-            <Navbar />
-            <main>{children}</main>
-            <Footer />
-            <WhatsAppButton />
-            <ScrollToTop />
-          </QueryProvider>
-        </ThemeProvider>
+        <NextIntlClientProvider messages={messages} locale={locale}>
+          <ThemeProvider>
+            <QueryProvider>
+              <Navbar />
+              <main>{children}</main>
+              <Footer />
+              <WhatsAppButton />
+              <ScrollToTop />
+            </QueryProvider>
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

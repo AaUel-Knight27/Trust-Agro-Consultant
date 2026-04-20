@@ -1,0 +1,111 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "blog": "News & Blog",
+    "gallery": "Gallery",
+    "about": "About",
+    "contact": "Contact",
+    "bookConsulting": "Book Consulting",
+    "callUs": "Call Us"
+  },
+  "hero": {
+    "tag": "Trusted Since 2021",
+    "headline": "Farm With Confidence",
+    "subtext": "Professional agricultural consulting and training services for farmers across Ethiopia.",
+    "cta1": "Get in Touch",
+    "cta2": "Discover About Us"
+  },
+  "about": {
+    "tag": "About Us",
+    "title": "Who We Are",
+    "body": "Agro Consulting P.L.C was established in 2021 by veterinary physicians with extensive experience in medium and large farms. Our organization is a multidisciplinary agricultural consulting business with operations across Ethiopia, founded in Bishoftu City.",
+    "readMore": "Read More"
+  },
+  "services": {
+    "tag": "What We Do",
+    "title": "Our Services",
+    "subtitle": "Comprehensive agricultural solutions for every farming level.",
+    "viewAll": "View All Services",
+    "readMore": "Read More",
+    "bookConsultation": "Book a Consultation"
+  },
+  "stats": {
+    "locations": "Locations",
+    "trainedFarmers": "Trained Farmers",
+    "successfulProjects": "Successful Projects",
+    "yearsOfExperience": "Years of Experience"
+  },
+  "values": {
+    "tag": "Our Foundation",
+    "title": "Core Values",
+    "respect": "Respect",
+    "respectDesc": "Showing respect to prior generations and learning from them.",
+    "humility": "Humility",
+    "humilityDesc": "Being confident yet humble in our approach to every client.",
+    "empowerment": "Empowerment",
+    "empowermentDesc": "Encouraging the youth to realize their potential for national development.",
+    "compassion": "Compassion",
+    "compassionDesc": "Demonstrating love and compassion for the next generation of farmers."
+  },
+  "contact": {
+    "tag": "Reach Us",
+    "title": "Contact Us",
+    "subtitle": "Get in touch with our team.",
+    "fullName": "Full Name",
+    "email": "Email",
+    "phone": "Phone",
+    "phoneOptional": "Phone (optional)",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully!",
+    "error": "Something went wrong. Please try again."
+  },
+  "blog": {
+    "tag": "Latest Updates",
+    "title": "News & Blog",
+    "subtitle": "Insights and news from the field.",
+    "readMore": "Read More",
+    "search": "Search articles...",
+    "noResults": "No results found",
+    "backToBlog": "Back to Blog",
+    "relatedArticles": "Related Articles"
+  },
+  "gallery": {
+    "tag": "Our Work",
+    "title": "Gallery",
+    "subtitle": "Photos from our farm visits, training sessions, and field operations.",
+    "all": "All",
+    "noImages": "No images in this category yet."
+  },
+  "cta": {
+    "title": "What can we help you overcome?",
+    "subtitle": "We help farming businesses stay ahead in a rapidly changing world.",
+    "button": "Contact Us"
+  },
+  "footer": {
+    "description": "Professional agricultural consulting and training services across Ethiopia since 2021.",
+    "services": "Our Services",
+    "contact": "Get In Touch",
+    "copyright": "© 2026 Trust Agro Consult P.L.C. All rights reserved."
+  },
+  "testimonials": {
+    "tag": "Client Stories",
+    "title": "What Our Clients Say",
+    "subtitle": "Trusted by farmers, organizations, and agribusinesses across Ethiopia."
+  },
+  "team": {
+    "tag": "The Team",
+    "title": "Our Experts"
+  },
+  "collaborations": {
+    "tag": "Trust and Worth",
+    "title": "Notable Collaborations"
+  },
+  "faq": {
+    "tag": "FAQ",
+    "title": "Common Questions"
+  }
+}
