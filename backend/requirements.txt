@@ -1,40 +1,13 @@
-# Core Framework
-Django==6.0.4
-djangorestframework==3.17.1
-django-cors-headers==4.9.0
-django-filter==25.2
-
-# Production Server & Database
-gunicorn==23.0.0
-psycopg2-binary==2.9.10
-dj-database-url==3.1.2
-whitenoise==6.12.0
-
-# Environment & Settings
+Django==5.2.1
+djangorestframework==3.15.2
+django-cors-headers==4.4.0
+Pillow==10.4.0
 python-decouple==3.8
-
-# Storage & Media
-cloudinary==1.44.2
+whitenoise==6.7.0
+django-filter==24.3
+cloudinary==1.41.0
 django-cloudinary-storage==0.3.0
-pillow==12.2.0
-
-# Utilities
-requests==2.33.1
-cryptography==46.0.7
-bcrypt==5.0.0
-
-# Notifications & Third-party
-sendgrid==6.12.5
-python-http-client==3.3.7
-
-# PDF Generation
-reportlab==4.4.4
-
-# Core Dependencies
-asgiref==3.11.1
-sqlparse==0.5.5
-tzdata==2026.1
-urllib3==2.6.3
-certifi==2025.11.12
-charset-normalizer==3.4.3
-idna==3.11
+dj-database-url==2.2.0
+psycopg2-binary==2.9.10
+gunicorn==22.0.0
+sendgrid==6.11.0

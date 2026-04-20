@@ -13,12 +13,12 @@ import { IMAGES } from "@/lib/images"
 import Image from "next/image"
 
 const SERVICE_IMAGES: Record<string, string> = {
-  'consulting-services':          IMAGES.serviceConsulting,
-  'training-service':             IMAGES.serviceTraining,
-  'veterinary-medical-service':   IMAGES.serviceVeterinary,
-  'animal-feed':                  IMAGES.serviceAnimalFeed,
-  'sale-of-farm-products':        IMAGES.serviceFarmProducts,
-  'animal-husbandry-equipment':   IMAGES.serviceEquipment,
+  'consulting-services': IMAGES.serviceConsulting,
+  'training-service': IMAGES.serviceTraining,
+  'veterinary-medical-service': IMAGES.serviceVeterinary,
+  'animal-feed': IMAGES.serviceAnimalFeed,
+  'sale-of-farm-products': IMAGES.serviceFarmProducts,
+  'animal-husbandry-equipment': IMAGES.serviceEquipment,
 }
 
 type PageProps = {
@@ -119,13 +119,7 @@ export default function ServiceDetailPage({ params }: PageProps) {
           <Button
             className="bg-green-700 text-white hover:bg-green-800"
             nativeButton={false}
-            render={
-              <a
-                href="https://trustagroconsult.com/book-consulting"
-                target="_blank"
-                rel="noopener noreferrer"
-              />
-            }
+            render={<Link href="/book" />}
           >
             Book a Consultation
           </Button>

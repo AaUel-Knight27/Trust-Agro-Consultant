@@ -67,7 +67,7 @@ export default function ServicesPage() {
           <Button
             className="mt-8 bg-green-700 text-white hover:bg-green-800"
             nativeButton={false}
-            render={<Link href="/contact" />}
+            render={<Link href="/book" />}
           >
             {t('bookConsultation')}
           </Button>

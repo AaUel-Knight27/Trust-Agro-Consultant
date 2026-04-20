@@ -27,16 +27,16 @@ export const IMAGES = {
   serviceTraining: `${BASE}/photo-1524178232363-1fb2b075b655?w=800&q=80&auto=format&fit=crop`,
   // Group training/workshop session
 
-  serviceVeterinary: `${BASE}/photo-1559841644-08984562005d?w=800&q=80&auto=format&fit=crop`,
+  serviceVeterinary: `https://plus.unsplash.com/premium_photo-1663088665739-62a157c3a0a7?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`,
   // Veterinarian with livestock
 
   serviceAnimalFeed: `${BASE}/photo-1516467508483-a7212febe31a?w=800&q=80&auto=format&fit=crop`,
   // Grain and animal feed
 
-  serviceFarmProducts: `${BASE}/photo-1595351298020-038700609878?w=800&q=80&auto=format&fit=crop`,
+  serviceFarmProducts: `https://images.unsplash.com/photo-1512360117454-22f9188c2379?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`,
   // Chickens/poultry farm
 
-  serviceEquipment: `${BASE}/photo-1581578731548-c64695cc6952?w=800&q=80&auto=format&fit=crop`,
+  serviceEquipment: `https://images.unsplash.com/photo-1545407263-7ff5aa2ad921?q=80&w=435&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D`,
   // Farm equipment/tools
 
   // ── Background textures ──────────────────────────

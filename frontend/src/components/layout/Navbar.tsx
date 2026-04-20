@@ -203,7 +203,7 @@ export function Navbar() {
               size="sm"
               nativeButton={false}
               className="bg-green-700 text-white hover:bg-green-800"
-              render={<Link href="/contact" />}
+              render={<Link href="/book" />}
             >
               <CalendarCheck size={14} className="mr-1" />
               {t('bookConsulting')}
@@ -312,7 +312,7 @@ export function Navbar() {
                     size="sm"
                     nativeButton={false}
                     className="w-full bg-green-700 text-white hover:bg-green-800"
-                    render={<Link href="/contact" onClick={() => setMobileOpen(false)} />}
+                    render={<Link href="/book" onClick={() => setMobileOpen(false)} />}
                   >
                     <CalendarCheck size={14} className="mr-1" />
                     {t('bookConsulting')}
