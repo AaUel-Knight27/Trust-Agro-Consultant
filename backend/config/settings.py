@@ -3,6 +3,8 @@ Django settings for Trust Agro Consult (config project).
 """
 
 from pathlib import Path
+from typing import Any
+
 import dj_database_url
 from decouple import Csv, config
 
@@ -38,11 +40,7 @@ INSTALLED_APPS = [
     'apps.contact',
 ]
 
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
-
-CLOUDINARY_STORAGE = {
+CLOUDINARY_STORAGE: dict[str, Any] = {
     'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': config('CLOUDINARY_API_KEY'),
     'API_SECRET': config('CLOUDINARY_API_SECRET'),
@@ -101,8 +99,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
