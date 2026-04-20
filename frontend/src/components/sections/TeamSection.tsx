@@ -5,13 +5,34 @@ import Link from "next/link"
 import { Facebook, Linkedin, Mail, Phone } from "lucide-react"
 
 import { SectionHeader } from "@/components/shared/SectionHeader"
-import { Skeleton } from "@/components/ui/skeleton"
 import { getSafeImageSrc } from "@/lib/imageUtils"
 import type { TeamMember } from "@/types"
 
-const TEAM = [
-  { id: 1, name: 'Dr. Abunu Andarga', role: 'Owner and General Manager', initials: 'AA', experience_short: '' },
-  { id: 2, name: 'Dr. Abunu Andarga', role: 'Owner and Vice Manager', initials: 'AA', experience_short: '' },
+const TEAM: TeamMember[] = [
+  {
+    id: 1,
+    name: 'Dr. Abunu Andarga',
+    role: 'Owner and General Manager',
+    experience_short: '',
+    photo: null,
+    facebook_url: '',
+    linkedin_url: '',
+    email: '',
+    phone: '',
+    order: 1
+  },
+  {
+    id: 2,
+    name: 'Dr. Abunu Andarga',
+    role: 'Owner and Vice Manager',
+    experience_short: '',
+    photo: null,
+    facebook_url: '',
+    linkedin_url: '',
+    email: '',
+    phone: '',
+    order: 2
+  },
 ]
 
 function initialsFromName(name: string): string {
@@ -60,23 +81,6 @@ function PhotoWaveAccent() {
   )
 }
 
-function MemberCardSkeleton() {
-  return (
-    <div className="overflow-hidden rounded-xl border border-border bg-card ring-1 ring-foreground/10">
-      <Skeleton className="aspect-[3/4] w-full rounded-none rounded-t-xl" />
-      <div className="space-y-3 px-6 pb-8 pt-6 text-center">
-        <Skeleton className="mx-auto h-6 w-40" />
-        <Skeleton className="mx-auto h-4 w-52" />
-        <div className="mt-4 flex justify-center gap-2">
-          <Skeleton className="size-9 rounded-sm" />
-          <Skeleton className="size-9 rounded-sm" />
-          <Skeleton className="size-9 rounded-sm" />
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export function TeamSection() {
   const members = TEAM;
 
@@ -90,8 +94,8 @@ export function TeamSection() {
         ) : (
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {members.map((member) => {
-              const photoSrc = (member as any).photo ? getSafeImageSrc((member as any).photo) : null
-              const contacts = memberContacts(member as any)
+              const photoSrc = member.photo ? getSafeImageSrc(member.photo) : null
+              const contacts = memberContacts(member)
               const hoverNote = member.experience_short?.trim() || ""
 
               return (
@@ -146,3 +150,4 @@ export function TeamSection() {
     </section>
   )
 }
+
