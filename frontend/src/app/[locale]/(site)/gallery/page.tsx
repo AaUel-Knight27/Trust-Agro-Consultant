@@ -5,13 +5,14 @@ import { useTranslations } from 'next-intl'
 import { getGalleryImages, getGalleryCategories } from '@/lib/api'
 import { BlurImage } from '@/components/shared/BlurImage'
 import { AnimateOnScroll } from '@/components/shared/AnimateOnScroll'
-import { SectionHeader } from '@/components/shared/SectionHeader'
 import { PageTransition } from '@/components/shared/PageTransition'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import Lightbox from 'yet-another-react-lightbox'
 import 'yet-another-react-lightbox/styles.css'
 import { ImageOff } from 'lucide-react'
+import Image from "next/image"
+import { IMAGES } from "@/lib/images"
 
 export default function GalleryPage() {
   const t = useTranslations('gallery')
@@ -33,13 +34,19 @@ export default function GalleryPage() {
   return (
     <PageTransition>
       {/* Hero */}
-      <section className="bg-zinc-900 text-white py-24 px-6 text-center">
-        <SectionHeader
-          tag={t('tag')}
-          title={t('title')}
-          subtitle={t('subtitle')}
-          centered
-        />
+      <section className="relative py-32 px-6 overflow-hidden">
+        <Image src={IMAGES.farmFieldAerial} alt="Gallery background" fill 
+               className="object-cover" priority sizes="100vw" />
+        <div className="absolute inset-0 bg-zinc-900/70" />
+        <div className="relative z-10 text-center text-white max-w-3xl mx-auto">
+          <p className="text-green-400 text-xs uppercase tracking-widest mb-4 font-semibold">
+            {t('tag')}
+          </p>
+          <h1 className="text-5xl font-bold mb-4">{t('title')}</h1>
+          <p className="text-zinc-300 text-lg">
+            {t('subtitle')}
+          </p>
+        </div>
       </section>
 
       {/* Filter tabs */}

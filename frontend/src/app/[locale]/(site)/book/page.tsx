@@ -2,7 +2,6 @@
 import { useState } from 'react'
 import { submitBooking } from '@/lib/api'
 import { PageTransition } from '@/components/shared/PageTransition'
-import { SectionHeader } from '@/components/shared/SectionHeader'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -10,6 +9,8 @@ import { Textarea } from '@/components/ui/textarea'
 import {
   CheckCircle2, CalendarCheck, User, Wheat, FileText
 } from 'lucide-react'
+import Image from 'next/image'
+import { IMAGES } from '@/lib/images'
 
 const SERVICE_OPTIONS = [
   { value: 'consulting', label: 'Consulting Services' },
@@ -71,13 +72,22 @@ export default function BookPage() {
   return (
     <PageTransition>
       {/* Hero */}
-      <section className="bg-zinc-900 text-white py-24 px-6 text-center">
-        <SectionHeader
-          tag="Get Started"
-          title="Book a Consultation"
-          subtitle="Fill in the form below and our team will confirm your appointment within 24 hours."
-          centered
-        />
+      <section className="relative py-32 px-6 overflow-hidden">
+        <Image src={IMAGES.bookingBg} alt="Farm consulting" fill 
+               className="object-cover" priority sizes="100vw" />
+        <div className="absolute inset-0 bg-zinc-900/75" />
+        <div className="relative z-10 text-center text-white max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 bg-green-700/70 backdrop-blur-sm 
+                          text-white text-xs font-semibold uppercase tracking-widest 
+                          px-4 py-2 rounded-full mb-6">
+            <CalendarCheck size={12} />
+            Free Initial Consultation
+          </div>
+          <h1 className="text-5xl font-bold mb-4">Book a Consultation</h1>
+          <p className="text-zinc-300 text-lg">
+            Fill in the form below and our team will confirm your appointment within 24 hours.
+          </p>
+        </div>
       </section>
 
       <section className="py-16 px-6">

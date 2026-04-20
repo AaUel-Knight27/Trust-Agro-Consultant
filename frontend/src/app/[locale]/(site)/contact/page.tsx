@@ -3,6 +3,9 @@
 import { useState } from "react"
 import { CheckCircle2, Mail, MapPin, Phone } from "lucide-react"
 import { useTranslations } from 'next-intl'
+import Image from "next/image"
+
+import { IMAGES } from "@/lib/images"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -85,36 +88,61 @@ export default function ContactPage() {
 
       <section className="py-16 px-6">
         <div className="mx-auto grid max-w-7xl gap-16 md:grid-cols-2">
-          <div className="space-y-6">
-            <div className="flex items-start gap-4 rounded-xl border border-border p-6">
-              <MapPin className="mt-1 size-5 shrink-0 text-green-700" aria-hidden />
+          <div className="relative rounded-2xl overflow-hidden min-h-96 lg:min-h-[600px]">
+            <Image
+              src={IMAGES.contactBg}
+              alt="Trust Agro farm"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            <div className="absolute inset-0 bg-green-900/80" />
+
+            <div className="relative z-10 p-8 md:p-12 h-full flex flex-col justify-between text-white">
               <div>
-                <p className="text-sm font-medium">Address</p>
-                <p className="mt-1 text-muted-foreground">Addis Ababa, Ethiopia</p>
+                <p className="text-green-300 text-xs uppercase tracking-widest font-semibold mb-2">
+                  Reach Us
+                </p>
+                <h2 className="text-3xl font-bold mb-6">Let&apos;s Talk Agriculture</h2>
+                <p className="text-zinc-300 leading-relaxed mb-8">
+                  Whether you&apos;re a smallholder or managing a commercial operation, 
+                  our team is ready to help.
+                </p>
               </div>
-            </div>
-            <div className="flex items-start gap-4 rounded-xl border border-border p-6">
-              <Phone className="mt-1 size-5 shrink-0 text-green-700" aria-hidden />
-              <div>
-                <p className="text-sm font-medium">{t('phone')}</p>
-                <a
-                  href="tel:+251919076607"
-                  className="mt-1 inline-block text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  +251 919 076 607
-                </a>
-              </div>
-            </div>
-            <div className="flex items-start gap-4 rounded-xl border border-border p-6">
-              <Mail className="mt-1 size-5 shrink-0 text-green-700" aria-hidden />
-              <div>
-                <p className="text-sm font-medium">{t('email')}</p>
-                <a
-                  href="mailto:info@trustagroconsult.com"
-                  className="mt-1 inline-block text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  info@trustagroconsult.com
-                </a>
+
+              <div className="space-y-5">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center flex-shrink-0">
+                    <MapPin size={16} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-zinc-400">Address</p>
+                    <p className="text-sm font-medium">Addis Ababa, Ethiopia</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Phone size={16} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-zinc-400">{t('phone')}</p>
+                    <a href="tel:+251919076607" className="text-sm font-medium hover:text-green-300 transition-colors">
+                      +251 919 076 607
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-green-700 rounded-full flex items-center justify-center flex-shrink-0">
+                    <Mail size={16} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-zinc-400">{t('email')}</p>
+                    <a href="mailto:info@trustagroconsult.com"
+                       className="text-sm font-medium hover:text-green-300 transition-colors">
+                      info@trustagroconsult.com
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

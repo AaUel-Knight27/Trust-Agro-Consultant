@@ -1,4 +1,7 @@
+"use client"
+
 import * as React from "react"
+import Image from "next/image"
 import Link from "next/link"
 import {
   ArrowRight,
@@ -17,11 +20,9 @@ import {
 } from "lucide-react"
 import { useTranslations } from 'next-intl'
 
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
-
-import { CloudinaryImage } from './CloudinaryImage'
+import { Card } from "@/components/ui/card"
 import { getSafeImageSrc } from '@/lib/imageUtils'
+import { IMAGES } from '@/lib/images'
 
 const iconMap: Record<string, LucideIcon> = {
   ClipboardList,
@@ -48,44 +49,59 @@ type ServiceCardProps = {
   cover_image?: string | null
 }
 
+const SERVICE_IMAGES: Record<string, string> = {
+  'consulting-services':          IMAGES.serviceConsulting,
+  'training-service':             IMAGES.serviceTraining,
+  'veterinary-medical-service':   IMAGES.serviceVeterinary,
+  'animal-feed':                  IMAGES.serviceAnimalFeed,
+  'sale-of-farm-products':        IMAGES.serviceFarmProducts,
+  'animal-husbandry-equipment':   IMAGES.serviceEquipment,
+}
+
 export function ServiceCard({ title, short_description, icon_name, slug, cover_image }: ServiceCardProps) {
   const t = useTranslations('services')
   const Icon = getLucideIcon(icon_name)
-  const coverSrc = getSafeImageSrc(cover_image)
+  const safeCover = getSafeImageSrc(cover_image)
+  const imageSrc = safeCover || SERVICE_IMAGES[slug] || IMAGES.aboutFarm
 
   return (
-    <Card
-      className={cn(
-        "transition-shadow hover:shadow-md overflow-hidden",
-        "h-full group cursor-pointer"
-      )}
-    >
-      <div className="relative h-40 w-full">
-        <CloudinaryImage
-          src={coverSrc}
-          alt={title}
-          fill
-          className="object-cover"
-        />
-      </div>
-      <CardHeader className="gap-3">
-        <div className="flex size-12 items-center justify-center rounded-lg bg-green-100 text-green-600 transition-transform duration-200 group-hover:scale-110">
-          <Icon className="size-6" aria-hidden />
+    <Card className="group overflow-hidden border-0 shadow-md hover:shadow-xl 
+                     transition-all duration-300 cursor-pointer">
+      <Link href={`/services/${slug}`}>
+
+        {/* Image */}
+        <div className="relative h-48 w-full overflow-hidden">
+          <Image
+            src={imageSrc}
+            alt={title}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+          {/* Dark overlay on hover */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
+
+          {/* Icon badge */}
+          <div className="absolute top-4 left-4 bg-green-700 text-white 
+                          rounded-lg p-2 shadow-lg">
+            <Icon size={18} />
+          </div>
         </div>
-        <CardTitle className="text-lg font-semibold leading-snug group-hover:text-green-700 transition-colors">{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <p className="line-clamp-2 text-sm text-muted-foreground">{short_description}</p>
-      </CardContent>
-      <CardFooter className="border-t-0 pt-0">
-        <Link
-          href={`/services/${slug}`}
-          className="inline-flex items-center text-sm font-medium text-green-700 hover:text-green-800"
-        >
-          {t('readMore')}
-          <ArrowRight className="ml-1 size-4" />
-        </Link>
-      </CardFooter>
+
+        {/* Content */}
+        <div className="p-5">
+          <h3 className="font-semibold text-lg mb-2 group-hover:text-green-700 transition-colors">
+            {title}
+          </h3>
+          <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+            {short_description}
+          </p>
+          <div className="flex items-center gap-1 text-green-700 text-sm font-medium">
+            {t('readMore')} <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+          </div>
+        </div>
+
+      </Link>
     </Card>
   )
 }

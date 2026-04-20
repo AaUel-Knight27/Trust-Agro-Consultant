@@ -1,12 +1,13 @@
 import { BlurImage } from "./BlurImage"
 import Link from "next/link"
-import { ArrowRight, CalendarDays, Newspaper } from "lucide-react"
+import { ArrowRight, CalendarDays } from "lucide-react"
 import { useTranslations } from 'next-intl'
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { getSafeImageSrc } from "@/lib/imageUtils"
 import type { Post } from "@/types"
+import { IMAGES } from "@/lib/images"
 
 type PostCardProps = {
   post: Post
@@ -26,23 +27,26 @@ function formatDate(iso: string, locale: string = 'en-US') {
 
 export function PostCard({ post }: PostCardProps) {
   const t = useTranslations('blog')
-  const coverSrc = getSafeImageSrc(post.cover_image)
+  const safeCoverSrc = getSafeImageSrc(post.cover_image)
+
+  const BLOG_FALLBACKS = [
+    IMAGES.greenFields,
+    IMAGES.livestock,
+    IMAGES.farmWorker,
+    IMAGES.dairy,
+  ]
+  const fallback = BLOG_FALLBACKS[post.id % BLOG_FALLBACKS.length]
+  const coverSrc = safeCoverSrc || fallback
 
   return (
     <Card className="group flex h-full min-h-0 flex-col overflow-hidden transition-shadow hover:shadow-md">
       <div className="relative h-48 w-full overflow-hidden rounded-t-lg shrink-0">
-        {coverSrc ? (
-          <BlurImage
-            src={coverSrc}
-            alt={post.title}
-            fill
-            className="object-cover transition-transform duration-300 group-hover:scale-105"
-          />
-        ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-zinc-100">
-            <Newspaper className="size-14 text-zinc-300" strokeWidth={1.25} aria-hidden />
-          </div>
-        )}
+        <BlurImage
+          src={coverSrc}
+          alt={post.title}
+          fill
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
+        />
       </div>
       <CardHeader className="gap-2">
         <div className="flex flex-wrap gap-2">

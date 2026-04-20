@@ -1,9 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { BlurImage } from "@/components/shared/BlurImage"
 import { useQuery } from "@tanstack/react-query"
-import { Wheat } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -11,6 +9,17 @@ import { getLucideIcon } from "@/components/shared/ServiceCard"
 import { getService, getServices } from "@/lib/api"
 import { getSafeImageSrc } from "@/lib/imageUtils"
 import { PageTransition } from "@/components/shared/PageTransition"
+import { IMAGES } from "@/lib/images"
+import Image from "next/image"
+
+const SERVICE_IMAGES: Record<string, string> = {
+  'consulting-services':          IMAGES.serviceConsulting,
+  'training-service':             IMAGES.serviceTraining,
+  'veterinary-medical-service':   IMAGES.serviceVeterinary,
+  'animal-feed':                  IMAGES.serviceAnimalFeed,
+  'sale-of-farm-products':        IMAGES.serviceFarmProducts,
+  'animal-husbandry-equipment':   IMAGES.serviceEquipment,
+}
 
 type PageProps = {
   params: { slug: string }
@@ -57,7 +66,6 @@ export default function ServiceDetailPage({ params }: PageProps) {
 
   const service = serviceQuery.data
   const coverSrc = getSafeImageSrc(service?.cover_image ?? null)
-  const Icon = service ? getLucideIcon(service.icon_name) : Wheat
 
   const otherServices =
     servicesQuery.data?.filter((s) => s.slug !== slug) ?? []
@@ -84,21 +92,22 @@ export default function ServiceDetailPage({ params }: PageProps) {
     <PageTransition className="mx-auto max-w-7xl px-6 py-12">
       <div className="grid gap-12 lg:grid-cols-3">
         <article className="space-y-8 lg:col-span-2">
-          {service.cover_image && (
-            <div className="relative aspect-video w-full overflow-hidden rounded-xl bg-muted mb-8">
-              <BlurImage
-                src={coverSrc || ""}
-                alt={service.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          )}
-
-          <div className="flex justify-center">
-            <div className="flex size-14 items-center justify-center rounded-full bg-green-100 text-green-600">
-              <Icon className="size-7" aria-hidden />
+          <div className="relative w-full h-80 md:h-96 rounded-2xl overflow-hidden shadow-xl mb-10">
+            <Image
+              src={coverSrc || SERVICE_IMAGES[service.slug] || IMAGES.aboutFarm}
+              alt={service.title}
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 66vw"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="absolute bottom-6 left-6 right-6">
+              <div className="inline-flex items-center gap-2 bg-green-700 text-white 
+                              rounded-full px-4 py-1.5 text-sm font-medium">
+                {(() => { const ServiceIcon = getLucideIcon(service.icon_name); return <ServiceIcon size={14} /> })()}
+                {service.title}
+              </div>
             </div>
           </div>
 

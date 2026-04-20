@@ -9,6 +9,8 @@ import { ServiceCardSkeleton } from "@/components/shared/LoadingSkeleton"
 import { ServiceCard } from "@/components/shared/ServiceCard"
 import { getServices } from "@/lib/api"
 import { PageTransition } from "@/components/shared/PageTransition"
+import Image from "next/image"
+import { IMAGES } from "@/lib/images"
 
 export default function ServicesPage() {
   const t = useTranslations('services')
@@ -19,10 +21,13 @@ export default function ServicesPage() {
 
   return (
     <PageTransition>
-      <section className="bg-zinc-900 py-24 text-white">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">{t('title')}</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-300">
+      <section className="relative py-32 px-6 overflow-hidden">
+        <Image src={IMAGES.serviceConsulting} alt="Services background" fill 
+               className="object-cover" priority sizes="100vw" />
+        <div className="absolute inset-0 bg-zinc-900/70" />
+        <div className="relative z-10 text-center text-white max-w-3xl mx-auto">
+          <h1 className="text-5xl font-bold mb-4">{t('title')}</h1>
+          <p className="text-zinc-300 text-lg">
             {t('subtitle')}
           </p>
         </div>

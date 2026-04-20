@@ -1,4 +1,4 @@
-import { Leaf } from "lucide-react"
+import Image from "next/image"
 
 import { CollaborationsSection } from "@/components/sections/CollaborationsSection"
 import { CTASection } from "@/components/sections/CTASection"
@@ -6,25 +6,36 @@ import { StatsSection } from "@/components/sections/StatsSection"
 import { TeamSection } from "@/components/sections/TeamSection"
 import { SectionHeader } from "@/components/shared/SectionHeader"
 import { PageTransition } from "@/components/shared/PageTransition"
+import { IMAGES } from "@/lib/images"
 
 export default function AboutPage() {
   return (
     <PageTransition>
-      <section className="bg-zinc-900 py-24 text-white">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">About Us</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-300">
+      {/* Hero with background image */}
+      <section className="relative py-40 px-6 overflow-hidden">
+        <Image src={IMAGES.greenFields} alt="Farm fields" fill 
+               className="object-cover" priority sizes="100vw" />
+        <div className="absolute inset-0 bg-zinc-900/70" />
+        <div className="relative z-10 text-center text-white max-w-3xl mx-auto">
+          <p className="text-green-400 text-xs uppercase tracking-widest mb-4 font-semibold">
+            Our Story
+          </p>
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">About Us</h1>
+          <p className="text-xl text-zinc-300">
             Learn how Trust Agro Consult supports Ethiopian farmers with evidence-based advisory services
             and practical training.
           </p>
         </div>
       </section>
 
-      <section className="py-20 px-6">
-        <div className="mx-auto grid max-w-7xl gap-12 md:grid-cols-2 md:items-start">
+      {/* Historical background — image + text side by side */}
+      <section className="py-24 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          {/* Text */}
           <div className="space-y-6">
-            <SectionHeader tag="About Us" title="Historical Background" />
-            <div className="space-y-4 text-muted-foreground leading-relaxed">
+            <SectionHeader tag="Our History" title="Historical Background" />
+            <div className="space-y-4 text-zinc-600 leading-relaxed">
               <p>
                 Trust Agro Consult P.L.C. was founded in Bishoftu City in 2021 by veterinary physicians
                 who had spent years supporting medium and large-scale farms across Ethiopia. What began
@@ -45,9 +56,19 @@ export default function AboutPage() {
               </p>
             </div>
           </div>
-          <div className="flex aspect-video items-center justify-center rounded-xl bg-muted">
-            <Leaf className="size-16 text-green-300" strokeWidth={1.25} aria-hidden />
+
+          {/* Image grid — 2x2 collage */}
+          <div className="grid grid-cols-2 gap-4">
+            {[IMAGES.livestock, IMAGES.poultry, IMAGES.dairy, IMAGES.farmWorker].map((src, i) => (
+              <div key={i} className={`relative rounded-xl overflow-hidden shadow-md
+                                       ${i === 0 ? 'h-56' : 'h-44'}`}>
+                <Image src={src} alt="Trust Agro farm" fill 
+                       className="object-cover hover:scale-105 transition-transform duration-500"
+                       sizes="(max-width: 768px) 50vw, 25vw" />
+              </div>
+            ))}
           </div>
+
         </div>
       </section>
 

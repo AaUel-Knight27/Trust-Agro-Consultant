@@ -11,8 +11,9 @@ import { PostCard } from "@/components/shared/PostCard"
 import { cn } from "@/lib/utils"
 import { getPosts } from "@/lib/api"
 import { PageTransition } from "@/components/shared/PageTransition"
-
 import { SearchBar } from "@/components/shared/SearchBar"
+import Image from "next/image"
+import { IMAGES } from "@/lib/images"
 
 /** Filter tabs use content type slugs (see `ContentType` in Django admin). */
 const contentTypeFilters = ["all", "news", "blog", "announcement"] as const
@@ -34,10 +35,13 @@ export default function BlogPage() {
 
   return (
     <PageTransition>
-      <section className="bg-zinc-900 py-24 text-white">
-        <div className="mx-auto max-w-7xl px-6 text-center">
-          <h1 className="text-4xl font-bold tracking-tight md:text-5xl">{t('title')}</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-zinc-300">
+      <section className="relative py-32 px-6 overflow-hidden">
+        <Image src={IMAGES.greenFields} alt="Farm fields" fill 
+               className="object-cover" priority sizes="100vw" />
+        <div className="absolute inset-0 bg-zinc-900/70" />
+        <div className="relative z-10 text-center text-white max-w-3xl mx-auto">
+          <h1 className="text-5xl font-bold mb-4">{t('title')}</h1>
+          <p className="text-zinc-300 text-lg">
             {t('subtitle')}
           </p>
         </div>
