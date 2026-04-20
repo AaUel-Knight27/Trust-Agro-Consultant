@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { useTranslations } from 'next-intl'
 import {
   BookOpen,
   CalendarCheck,
@@ -30,6 +31,7 @@ import {
 } from "@/components/ui/navigation-menu"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { ThemeToggle } from "@/components/layout/ThemeToggle"
+import { LanguageSwitcher } from "@/components/shared/LanguageSwitcher"
 import { useScrolled } from "@/hooks/useScrolled"
 import { cn } from "@/lib/utils"
 
@@ -82,6 +84,7 @@ function LogoMark() {
 }
 
 export function Navbar() {
+  const t = useTranslations('nav')
   const pathname = usePathname()
   const scrolled = useScrolled(10)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -118,12 +121,12 @@ export function Navbar() {
                       isActive("/") && "text-green-700 font-medium"
                     )}
                   >
-                    Home
+                    {t('home')}
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Services</NavigationMenuTrigger>
+                  <NavigationMenuTrigger>{t('services')}</NavigationMenuTrigger>
                   <NavigationMenuContent className="min-w-[min(100vw-2rem,20rem)] p-2">
                     <ul className="flex flex-col gap-0.5">
                       {services.map(({ href, label, icon: Icon }) => (
@@ -153,7 +156,7 @@ export function Navbar() {
                       isActive("/gallery") && "text-green-700 font-medium"
                     )}
                   >
-                    Gallery
+                    {t('gallery')}
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
@@ -165,7 +168,7 @@ export function Navbar() {
                       isActive("/about") && "text-green-700 font-medium"
                     )}
                   >
-                    About
+                    {t('about')}
                   </NavigationMenuLink>
                 </NavigationMenuItem>
 
@@ -177,7 +180,7 @@ export function Navbar() {
                       isActive("/contact") && "text-green-700 font-medium"
                     )}
                   >
-                    Contact
+                    {t('contact')}
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
@@ -185,6 +188,7 @@ export function Navbar() {
           </div>
 
           <div className="flex shrink-0 items-center gap-2">
+            <LanguageSwitcher />
             <ThemeToggle />
             <Button
               variant="outline"
@@ -193,7 +197,7 @@ export function Navbar() {
               render={<a href="tel:+251919076607" />}
             >
               <Phone size={14} className="mr-1" />
-              +251 919 076 607
+              {t('callUs')}
             </Button>
             <Button
               size="sm"
@@ -202,7 +206,7 @@ export function Navbar() {
               render={<Link href="/contact" />}
             >
               <CalendarCheck size={14} className="mr-1" />
-              Book Consulting
+              {t('bookConsulting')}
             </Button>
           </div>
         </div>
@@ -211,6 +215,7 @@ export function Navbar() {
         <div className="flex w-full items-center justify-between gap-2 md:hidden">
           <LogoMark />
           <div className="flex shrink-0 items-center gap-1">
+            <LanguageSwitcher />
             <ThemeToggle />
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger
@@ -240,11 +245,11 @@ export function Navbar() {
                     )}
                     onClick={() => setMobileOpen(false)}
                   >
-                    Home
+                    {t('home')}
                   </Link>
 
                   <div className="flex items-center gap-1 px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                    Services
+                    {t('services')}
                     <ChevronDown className="size-3" aria-hidden />
                   </div>
                   {services.map(({ href, label, icon: Icon }) => (
@@ -270,7 +275,7 @@ export function Navbar() {
                     )}
                     onClick={() => setMobileOpen(false)}
                   >
-                    Gallery
+                    {t('gallery')}
                   </Link>
                   <Link
                     href="/about"
@@ -280,7 +285,7 @@ export function Navbar() {
                     )}
                     onClick={() => setMobileOpen(false)}
                   >
-                    About
+                    {t('about')}
                   </Link>
                   <Link
                     href="/contact"
@@ -290,7 +295,7 @@ export function Navbar() {
                     )}
                     onClick={() => setMobileOpen(false)}
                   >
-                    Contact
+                    {t('contact')}
                   </Link>
                 </nav>
 
@@ -310,7 +315,7 @@ export function Navbar() {
                     render={<Link href="/contact" onClick={() => setMobileOpen(false)} />}
                   >
                     <CalendarCheck size={14} className="mr-1" />
-                    Book Consulting
+                    {t('bookConsulting')}
                   </Button>
                 </div>
               </SheetContent>

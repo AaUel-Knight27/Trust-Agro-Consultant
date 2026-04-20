@@ -8,6 +8,7 @@ import { staggerContainer, scaleIn } from '@/lib/animations'
 import { Quote, Star, User } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 
 function StarRating({ rating }: { rating: number }) {
   return (
@@ -24,6 +25,7 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export function TestimonialsSection() {
+  const t = useTranslations('testimonials')
   const { data: testimonials, isLoading } = useQuery({
     queryKey: ['testimonials', 'featured'],
     queryFn: () => getTestimonials(true),
@@ -33,9 +35,9 @@ export function TestimonialsSection() {
     <section className="py-20 px-6 bg-zinc-50">
       <div className="max-w-7xl mx-auto">
         <SectionHeader
-          tag="Client Stories"
-          title="What Our Clients Say"
-          subtitle="Trusted by farmers, organizations, and agribusinesses across Ethiopia."
+          tag={t('tag')}
+          title={t('title')}
+          subtitle={t('subtitle')}
           centered
         />
 

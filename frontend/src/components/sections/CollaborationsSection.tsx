@@ -1,4 +1,6 @@
+"use client"
 import { Building2 } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 import { SectionHeader } from "@/components/shared/SectionHeader"
 
@@ -9,10 +11,12 @@ const partners = [
 ] as const
 
 export function CollaborationsSection() {
+  const t = useTranslations('collaborations')
+
   return (
     <section className="py-20 px-6">
       <div className="mx-auto max-w-7xl space-y-12">
-        <SectionHeader tag="Trust and Worth" title="Notable Collaborations" centered />
+        <SectionHeader tag={t('tag')} title={t('title')} centered />
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {partners.map((name) => (

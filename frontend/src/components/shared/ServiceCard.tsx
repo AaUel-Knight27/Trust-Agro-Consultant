@@ -15,6 +15,7 @@ import {
   Users,
   LucideIcon,
 } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { cn } from "@/lib/utils"
@@ -48,6 +49,7 @@ type ServiceCardProps = {
 }
 
 export function ServiceCard({ title, short_description, icon_name, slug, cover_image }: ServiceCardProps) {
+  const t = useTranslations('services')
   const Icon = getLucideIcon(icon_name)
   const coverSrc = getSafeImageSrc(cover_image)
 
@@ -80,7 +82,7 @@ export function ServiceCard({ title, short_description, icon_name, slug, cover_i
           href={`/services/${slug}`}
           className="inline-flex items-center text-sm font-medium text-green-700 hover:text-green-800"
         >
-          Read More
+          {t('readMore')}
           <ArrowRight className="ml-1 size-4" />
         </Link>
       </CardFooter>

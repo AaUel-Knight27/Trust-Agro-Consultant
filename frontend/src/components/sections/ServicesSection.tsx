@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useQuery } from "@tanstack/react-query"
+import { useTranslations } from 'next-intl'
 
 import { Button } from "@/components/ui/button"
 import { ServiceCardSkeleton } from "@/components/shared/LoadingSkeleton"
@@ -13,6 +14,7 @@ import { staggerContainer, scaleIn } from "@/lib/animations"
 import { AnimateOnScroll } from "@/components/shared/AnimateOnScroll"
 
 export function ServicesSection() {
+  const t = useTranslations('services')
   const { data: services, isLoading, isError } = useQuery({
     queryKey: ["services"],
     queryFn: getServices,
@@ -22,9 +24,9 @@ export function ServicesSection() {
     <section className="py-20 px-6">
       <div className="mx-auto max-w-7xl space-y-12">
         <SectionHeader
-          tag="What We Do"
-          title="Our Services"
-          subtitle="Comprehensive agricultural solutions for every farming level."
+          tag={t('tag')}
+          title={t('title')}
+          subtitle={t('subtitle')}
           centered
         />
 
@@ -68,7 +70,7 @@ export function ServicesSection() {
 
         <div className="flex justify-center">
           <Button nativeButton={false} render={<Link href="/services" />}>
-            View All Services
+            {t('viewAll')}
           </Button>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { BlurImage } from "./BlurImage"
 import Link from "next/link"
 import { ArrowRight, CalendarDays, Newspaper } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -11,9 +12,9 @@ type PostCardProps = {
   post: Post
 }
 
-function formatDate(iso: string) {
+function formatDate(iso: string, locale: string = 'en-US') {
   try {
-    return new Date(iso).toLocaleDateString(undefined, {
+    return new Date(iso).toLocaleDateString(locale, {
       year: "numeric",
       month: "short",
       day: "numeric",
@@ -24,6 +25,7 @@ function formatDate(iso: string) {
 }
 
 export function PostCard({ post }: PostCardProps) {
+  const t = useTranslations('blog')
   const coverSrc = getSafeImageSrc(post.cover_image)
 
   return (
@@ -67,7 +69,7 @@ export function PostCard({ post }: PostCardProps) {
           href={`/blog/${post.slug}`}
           className="inline-flex items-center text-sm font-medium text-green-700 hover:text-green-800"
         >
-          Read More
+          {t('readMore')}
           <ArrowRight className="ml-1 size-4" />
         </Link>
       </CardFooter>

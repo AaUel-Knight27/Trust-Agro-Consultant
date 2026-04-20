@@ -3,6 +3,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Facebook, Linkedin, Mail, Phone } from "lucide-react"
+import { useTranslations } from 'next-intl'
 
 import { SectionHeader } from "@/components/shared/SectionHeader"
 import { getSafeImageSrc } from "@/lib/imageUtils"
@@ -82,12 +83,13 @@ function PhotoWaveAccent() {
 }
 
 export function TeamSection() {
+  const t = useTranslations('team')
   const members = TEAM;
 
   return (
     <section className="py-20 px-6">
       <div className="mx-auto max-w-7xl space-y-12">
-        <SectionHeader tag="The Team" title="Our Experts" centered />
+        <SectionHeader tag={t('tag')} title={t('title')} centered />
 
         {!members?.length ? (
           <p className="text-center text-muted-foreground">No team members are listed yet.</p>
@@ -150,4 +152,3 @@ export function TeamSection() {
     </section>
   )
 }
-

@@ -1,7 +1,9 @@
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { NextIntlClientProvider } from 'next-intl'
-import { getMessages } from 'next-intl/server'
+import { getMessages, setRequestLocale } from 'next-intl/server'
+import { notFound } from 'next/navigation'
+import { hasLocale } from 'next-intl'
 
 import "./globals.css"
 import { Footer } from "@/components/layout/Footer"
@@ -18,13 +20,21 @@ export const metadata: Metadata = {
   description: "Agricultural consulting and training in Ethiopia",
 }
 
+const locales = ['en', 'am'] as const
+
 export default async function LocaleLayout({
   children,
-  params: { locale }
+  params
 }: {
   children: React.ReactNode
   params: { locale: string }
 }) {
+  const { locale } = await params
+  if (!hasLocale(locales, locale)) {
+    notFound()
+  }
+  setRequestLocale(locale)
+
   const messages = await getMessages()
 
   return (
@@ -44,4 +54,8 @@ export default async function LocaleLayout({
       </body>
     </html>
   )
+}
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
 }

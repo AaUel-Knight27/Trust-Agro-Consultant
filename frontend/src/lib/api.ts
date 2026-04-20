@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Service, Post, ContactForm, TeamMember, SiteStat, SiteConfig, Testimonial, GalleryCategory, GalleryImage } from '@/types'
+import { Service, Post, ContactForm, TeamMember, SiteStat, SiteConfig, Testimonial, GalleryCategory, GalleryImage, ConsultationBooking } from '@/types'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000'
 
@@ -76,4 +76,7 @@ export const getGalleryImages = (categorySlug?: string): Promise<GalleryImage[]>
 
 export const getGalleryCategories = (): Promise<GalleryCategory[]> =>
   api.get('/api/gallery/categories/').then(r => r.data)
+
+export const submitBooking = (data: ConsultationBooking): Promise<{ message: string, booking_date: string }> =>
+  api.post('/api/contact/book/', data).then(r => r.data)
 
