@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { getLucideIcon } from "@/components/shared/ServiceCard"
 import { getService, getServices } from "@/lib/api"
-import { resolveMediaUrl } from "@/lib/mediaUrl"
+import { getSafeImageSrc } from "@/lib/imageUtils"
 import { PageTransition } from "@/components/shared/PageTransition"
 
 type PageProps = {
@@ -56,7 +56,7 @@ export default function ServiceDetailPage({ params }: PageProps) {
   })
 
   const service = serviceQuery.data
-  const coverSrc = resolveMediaUrl(service?.cover_image ?? null)
+  const coverSrc = getSafeImageSrc(service?.cover_image ?? null)
   const Icon = service ? getLucideIcon(service.icon_name) : Wheat
 
   const otherServices =

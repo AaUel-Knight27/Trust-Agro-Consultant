@@ -6,7 +6,7 @@ import { Facebook, Linkedin, Mail, Phone } from "lucide-react"
 
 import { SectionHeader } from "@/components/shared/SectionHeader"
 import { Skeleton } from "@/components/ui/skeleton"
-import { resolveMediaUrl } from "@/lib/mediaUrl"
+import { getSafeImageSrc } from "@/lib/imageUtils"
 import type { TeamMember } from "@/types"
 
 const TEAM = [
@@ -90,7 +90,7 @@ export function TeamSection() {
         ) : (
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {members.map((member) => {
-              const photoSrc = (member as any).photo ? resolveMediaUrl((member as any).photo) : null
+              const photoSrc = (member as any).photo ? getSafeImageSrc((member as any).photo) : null
               const contacts = memberContacts(member as any)
               const hoverNote = member.experience_short?.trim() || ""
 

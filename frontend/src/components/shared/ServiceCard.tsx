@@ -15,7 +15,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { cn } from "@/lib/utils"
 
 import { CloudinaryImage } from './CloudinaryImage'
-import { resolveMediaUrl } from '@/lib/mediaUrl'
+import { getSafeImageSrc } from '@/lib/imageUtils'
 
 const iconMap = {
   ClipboardList,
@@ -40,7 +40,7 @@ type ServiceCardProps = {
 
 export function ServiceCard({ title, short_description, icon_name, slug, cover_image }: ServiceCardProps) {
   const Icon = getLucideIcon(icon_name)
-  const coverSrc = resolveMediaUrl(cover_image)
+  const coverSrc = getSafeImageSrc(cover_image)
 
   return (
     <Card

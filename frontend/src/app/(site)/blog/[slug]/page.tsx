@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Skeleton } from "@/components/ui/skeleton"
 import { getPost } from "@/lib/api"
-import { resolveMediaUrl } from "@/lib/mediaUrl"
+import { getSafeImageSrc } from "@/lib/imageUtils"
 import { PageTransition } from "@/components/shared/PageTransition"
 
 type PageProps = {
@@ -60,7 +60,7 @@ export default function BlogPostPage({ params }: PageProps) {
     )
   }
 
-  const coverSrc = resolveMediaUrl(post.cover_image)
+  const coverSrc = getSafeImageSrc(post.cover_image)
 
   return (
     <PageTransition>

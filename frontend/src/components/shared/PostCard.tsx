@@ -4,7 +4,7 @@ import { ArrowRight, CalendarDays, Newspaper } from "lucide-react"
 
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { resolveMediaUrl } from "@/lib/mediaUrl"
+import { getSafeImageSrc } from "@/lib/imageUtils"
 import type { Post } from "@/types"
 
 type PostCardProps = {
@@ -24,7 +24,7 @@ function formatDate(iso: string) {
 }
 
 export function PostCard({ post }: PostCardProps) {
-  const coverSrc = resolveMediaUrl(post.cover_image)
+  const coverSrc = getSafeImageSrc(post.cover_image)
 
   return (
     <Card className="group flex h-full min-h-0 flex-col overflow-hidden transition-shadow hover:shadow-md">
