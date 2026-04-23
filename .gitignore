@@ -18,3 +18,4 @@ frontend/.vercel
 .DS_Store
 Thumbs.db
 *.log
+.idea
